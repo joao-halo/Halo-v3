@@ -1,0 +1,464 @@
+/* ============================================================
+   HALO — DESIGN TOKENS
+   Fonte ÚNICA de verdade dos valores brutos do design system.
+   Espelha HALO-Design-System/03-tokens/tokens.css, acrescido de
+   canais RGB (para alpha no Tailwind) e das extensões marcadas
+   [EXT] — todas registradas em DESIGN-TOKENS.md.
+
+   Uso:  @import "./tokens.css";  →  color: var(--color-primary);
+   ============================================================ */
+
+:root {
+  /* ==========================================================
+     1. CANAIS RGB — base numérica única de toda a cor
+     Cada token de cor é derivado destes canais, o que permite
+     `rgb(var(--x) / <alpha-value>)` no Tailwind.  [EXT-técnica]
+     ========================================================== */
+
+  /* Verde Esmeralda (primária) */
+  --green-50-ch:  233 245 239;  /* #E9F5EF */
+  --green-100-ch: 200 230 214;  /* #C8E6D6 */
+  --green-200-ch: 146 205 172;  /* #92CDAC */
+  --green-300-ch:  52 178 119;  /* #34B277 */
+  --green-400-ch:   8 153  90;  /* #08995A */
+  --green-500-ch:   0 109  64;  /* #006D40 — base */
+  --green-600-ch:   0  92  54;  /* #005C36 */
+  --green-700-ch:   0  71  42;  /* #00472A */
+  --green-800-ch:   0  51  30;  /* #00331E */
+  --green-900-ch:   0  36  21;  /* #002415 */
+
+  /* Azul Médio (secundária) */
+  --blue-50-ch:  236 243 250;   /* #ECF3FA */
+  --blue-100-ch: 207 224 241;   /* #CFE0F1 */
+  --blue-200-ch: 164 196 228;   /* #A4C4E4 */
+  --blue-300-ch: 121 168 214;   /* #79A8D6 */
+  --blue-400-ch:  94 146 204;   /* #5E92CC */
+  --blue-500-ch:  61 124 191;   /* #3D7CBF — base */
+  --blue-600-ch:  51 102 157;   /* #33669D */
+  --blue-700-ch:  41  80 124;   /* #29507C */
+  --blue-800-ch:  31  59  91;   /* #1F3B5B */
+  --blue-900-ch:  21  39  59;   /* #15273B */
+
+  /* Amarelo Ouro (destaque) */
+  --gold-50-ch:  251 246 231;   /* #FBF6E7 */
+  --gold-100-ch: 245 233 190;   /* #F5E9BE */
+  --gold-200-ch: 235 212 133;   /* #EBD485 */
+  --gold-300-ch: 225 191  77;   /* #E1BF4D */
+  --gold-400-ch: 217 178  62;   /* #D9B23E */
+  --gold-500-ch: 212 175  55;   /* #D4AF37 — base */
+  --gold-600-ch: 176 144  44;   /* #B0902C */
+  --gold-700-ch: 138 113  34;   /* #8A7122 */
+  --gold-800-ch:  99  81  25;   /* #635119 */
+  --gold-900-ch:  61  50  16;   /* #3D3210 */
+
+  /* Neutros — grafite (charcoal do template corporativo) */
+  --neutral-0-ch:   255 255 255; /* #FFFFFF */
+  --neutral-50-ch:  246 247 247; /* #F6F7F7 */
+  --neutral-100-ch: 236 237 238; /* #ECEDEE */
+  --neutral-200-ch: 215 217 219; /* #D7D9DB */
+  --neutral-300-ch: 183 187 190; /* #B7BBBE */
+  --neutral-400-ch: 142 147 150; /* #8E9396 */
+  --neutral-500-ch: 107 112 115; /* #6B7073 */
+  --neutral-600-ch:  78  82  85; /* #4E5255 */
+  --neutral-700-ch:  58  62  64; /* #3A3E40 */
+  --neutral-800-ch:  42  45  47; /* #2A2D2F — charcoal */
+  --neutral-900-ch:  27  29  30; /* #1B1D1E */
+  --neutral-950-ch:  15  16  17; /* #0F1011 */
+  --neutral-black-ch: 0   0   0; /* #000000 */
+
+  /* Feedback */
+  --success-ch:      31 145  89; /* #1F9159 */
+  --success-soft-ch:231 244 236; /* #E7F4EC */
+  --danger-ch:      200  55  45; /* #C8372D */
+  --danger-soft-ch: 251 234 232; /* #FBEAE8 */
+
+  /* ==========================================================
+     2. ESCALAS DE COR (hex resolvido a partir dos canais)
+     ========================================================== */
+
+  /* Cores de marca (núcleo HALO) */
+  --halo-green: rgb(var(--green-500-ch));  /* Verde Esmeralda — primária  */
+  --halo-blue:  rgb(var(--blue-500-ch));   /* Azul Médio      — secundária */
+  --halo-gold:  rgb(var(--gold-500-ch));   /* Amarelo Ouro    — destaque  */
+  /* Ponta do 3º arco do anel. Está em assets/halo-logo.svg mas NÃO consta de
+     nenhuma escala do design system — é a única cor da marca sem token.
+     Ver "Lacunas" em DESIGN-TOKENS.md. */
+  --halo-ring-tip: #4F8FD0;
+
+  --green-50:  rgb(var(--green-50-ch));
+  --green-100: rgb(var(--green-100-ch));
+  --green-200: rgb(var(--green-200-ch));
+  --green-300: rgb(var(--green-300-ch));
+  --green-400: rgb(var(--green-400-ch));
+  --green-500: rgb(var(--green-500-ch));
+  --green-600: rgb(var(--green-600-ch));
+  --green-700: rgb(var(--green-700-ch));
+  --green-800: rgb(var(--green-800-ch));
+  --green-900: rgb(var(--green-900-ch));
+
+  --blue-50:  rgb(var(--blue-50-ch));
+  --blue-100: rgb(var(--blue-100-ch));
+  --blue-200: rgb(var(--blue-200-ch));
+  --blue-300: rgb(var(--blue-300-ch));
+  --blue-400: rgb(var(--blue-400-ch));
+  --blue-500: rgb(var(--blue-500-ch));
+  --blue-600: rgb(var(--blue-600-ch));
+  --blue-700: rgb(var(--blue-700-ch));
+  --blue-800: rgb(var(--blue-800-ch));
+  --blue-900: rgb(var(--blue-900-ch));
+
+  --gold-50:  rgb(var(--gold-50-ch));
+  --gold-100: rgb(var(--gold-100-ch));
+  --gold-200: rgb(var(--gold-200-ch));
+  --gold-300: rgb(var(--gold-300-ch));
+  --gold-400: rgb(var(--gold-400-ch));
+  --gold-500: rgb(var(--gold-500-ch));
+  --gold-600: rgb(var(--gold-600-ch));
+  --gold-700: rgb(var(--gold-700-ch));
+  --gold-800: rgb(var(--gold-800-ch));
+  --gold-900: rgb(var(--gold-900-ch));
+
+  --neutral-0:     rgb(var(--neutral-0-ch));
+  --neutral-50:    rgb(var(--neutral-50-ch));
+  --neutral-100:   rgb(var(--neutral-100-ch));
+  --neutral-200:   rgb(var(--neutral-200-ch));
+  --neutral-300:   rgb(var(--neutral-300-ch));
+  --neutral-400:   rgb(var(--neutral-400-ch));
+  --neutral-500:   rgb(var(--neutral-500-ch));
+  --neutral-600:   rgb(var(--neutral-600-ch));
+  --neutral-700:   rgb(var(--neutral-700-ch));
+  --neutral-800:   rgb(var(--neutral-800-ch));
+  --neutral-900:   rgb(var(--neutral-900-ch));
+  --neutral-950:   rgb(var(--neutral-950-ch));
+  --neutral-black: rgb(var(--neutral-black-ch));
+
+  /* ==========================================================
+     3. CORES SEMÂNTICAS (papéis)
+     ========================================================== */
+  --color-primary:        var(--green-500);
+  --color-primary-hover:  var(--green-600);
+  --color-primary-soft:   var(--green-50);
+
+  --color-secondary:       var(--blue-500);
+  --color-secondary-hover: var(--blue-600);
+  --color-secondary-soft:  var(--blue-50);
+
+  --color-accent:        var(--gold-500);
+  --color-accent-hover:  var(--gold-600);
+  --color-accent-soft:   var(--gold-50);
+  /* Ouro como TEXTO sobre superfície clara.
+     O ouro 500 reprova em contraste sobre branco (2.06:1). Este papel usa o
+     ouro 700 (4.68:1, AA) e existe só para texto — fundos, fios e superfícies
+     continuam usando --color-accent. Ver "Contraste" em DESIGN-TOKENS.md. */
+  --color-accent-on-light: var(--gold-700);
+
+  /* Texto */
+  --color-text:          var(--neutral-900);
+  --color-text-muted:    var(--neutral-500);
+  --color-text-inverse:  var(--neutral-0);
+  --color-text-on-brand: var(--neutral-0);
+  --color-text-on-accent: var(--neutral-900); /* regra de ouro: escuro sobre ouro */
+  /* Corpo de texto dentro de bloco escuro — o rgba(255,255,255,.78) do showcase. */
+  --color-text-inverse-muted: rgb(var(--neutral-0-ch) / 0.78);
+
+  /* Superfícies */
+  --color-bg:            var(--neutral-0);
+  --color-bg-subtle:     var(--neutral-50);
+  --color-surface:       var(--neutral-0);
+  --color-surface-dark:  var(--neutral-800);
+  --color-border:        var(--neutral-200);
+  --color-border-strong: var(--neutral-300);
+
+  /* Estado / feedback */
+  --color-success:      rgb(var(--success-ch));
+  --color-success-soft: rgb(var(--success-soft-ch));
+  --color-info:         var(--blue-500);
+  --color-info-soft:    var(--blue-50);
+  --color-warning:      var(--gold-500);
+  --color-warning-soft: var(--gold-50);
+  --color-danger:       rgb(var(--danger-ch));
+  --color-danger-soft:  rgb(var(--danger-soft-ch));
+
+  /* ==========================================================
+     4. GRADIENTES (assinatura HALO)
+     ========================================================== */
+  --gradient-brand:   linear-gradient(135deg, #D4AF37 0%, #006D40 55%, #3D7CBF 100%); /* "Aurora" — logo */
+  --gradient-emerald: linear-gradient(135deg, #006D40 0%, #3D7CBF 100%);              /* CTA principal */
+  /* Variante do esmeralda para botão COM TEXTO BRANCO.
+     Branco sobre o azul 500 do extremo direito mede 4,34:1 e reprova em AA
+     (exige 4,5:1). Terminar no azul 600 leva a 5,95:1 sem sair da escala.
+     Superfícies sem texto continuam usando --gradient-emerald. */
+  --gradient-emerald-cta: linear-gradient(135deg, #006D40 0%, #33669D 100%);
+  --gradient-gold:    linear-gradient(135deg, #D4AF37 0%, #006D40 100%);
+  --gradient-sun:     linear-gradient(135deg, #D4AF37 0%, #3D7CBF 100%);
+  --gradient-dark:    linear-gradient(135deg, #2A2D2F 0%, #00331E 100%);
+
+  /* ==========================================================
+     5. TIPOGRAFIA
+     Fraunces (serifada) nos títulos · Outfit (sans) no corpo.
+     --font-brand: wordmark "Halo", overlines e rótulos pequenos.
+     ========================================================== */
+  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-body:    "Outfit", "Segoe UI", system-ui, sans-serif;
+  --font-brand:   "Outfit", "Segoe UI", system-ui, sans-serif;
+
+  /* Escala tipográfica (ratio ~1.25, base 16px) */
+  --text-overline: 0.75rem;   /* 12px — rótulos "CREATIVE DESIGN" */
+  --text-caption:  0.75rem;   /* 12px */
+  --text-sm:       0.875rem;  /* 14px */
+  --text-base:     1rem;      /* 16px */
+  --text-lg:       1.125rem;  /* 18px */
+  --text-xl:       1.5rem;    /* 24px — H3 */
+  --text-2xl:      2rem;      /* 32px — H2 */
+  --text-3xl:      2.5rem;    /* 40px — H1 */
+  --text-4xl:      3.5rem;    /* 56px — Display */
+
+  --weight-light:    300;
+  --weight-regular:  400;
+  --weight-medium:   500;
+  --weight-semibold: 600;
+  --weight-bold:     700;
+
+  --leading-tight:   1.15;  /* títulos grandes */
+  --leading-snug:    1.3;   /* subtítulos */
+  --leading-normal:  1.6;   /* corpo */
+  --leading-none:    1;     /* [EXT] número-herói da estatística */
+
+  --tracking-tight:    -0.02em;  /* títulos display */
+  --tracking-heading:  -0.015em; /* [showcase] h1–h4 gerais */
+  --tracking-brand:    -0.01em;  /* wordmark "Halo" */
+  --tracking-normal:   0;
+  --tracking-wide:     0.04em;
+  --tracking-hero-sub: 0.06em;   /* [showcase] subtítulo da capa */
+  --tracking-topbar:   0.14em;   /* [showcase] barra superior da capa */
+  --tracking-overline: 0.18em;   /* rótulos em maiúsculas */
+
+  /* ==========================================================
+     6. ESPAÇAMENTO (base 8px; 4px só para ajuste fino)
+     ========================================================== */
+  --space-1:  0.25rem;  /*   4px */
+  --space-2:  0.5rem;   /*   8px */
+  --space-3:  0.75rem;  /*  12px */
+  --space-4:  1rem;     /*  16px */
+  --space-5:  1.5rem;   /*  24px — gutter da grade */
+  --space-6:  2rem;     /*  32px — padding de card */
+  --space-7:  3rem;     /*  48px — entre seções */
+  --space-8:  4rem;     /*  64px — margem de slide */
+  --space-9:  6rem;     /*  96px — respiro de capa */
+  --space-10: 8rem;     /* 128px — grandes vazios editoriais */
+
+  /* ==========================================================
+     7. RAIO DE BORDA
+     Caixas/imagens retas (corporativo) + botões pílula (marca).
+     ========================================================== */
+  --radius-none: 0;
+  --radius-sm:   4px;   /* inputs, tags */
+  --radius-md:   8px;   /* cards */
+  --radius-lg:   16px;  /* cards de destaque, painéis */
+  --radius-xl:   24px;  /* containers grandes */
+  --radius-full: 999px; /* botões pílula */
+
+  /* ==========================================================
+     8. SOMBRAS / ELEVAÇÃO
+     ========================================================== */
+  --shadow-sm: 0 1px 2px rgba(15, 16, 17, 0.06);
+  --shadow-md: 0 4px 12px rgba(15, 16, 17, 0.08);
+  --shadow-lg: 0 12px 28px rgba(15, 16, 17, 0.12);
+  --shadow-xl: 0 24px 48px rgba(15, 16, 17, 0.16);
+
+  /* ==========================================================
+     9. LAYOUT
+     ========================================================== */
+  --container-max:   1200px;  /* grade documentada */
+  --container-wrap:  1120px;  /* [showcase] largura do .wrap */
+  --container-pad:   2rem;    /* [showcase] 32px lateral */
+  --grid-columns:    12;
+  --grid-gutter:     var(--space-5);
+  --slide-ratio:     16 / 9;
+  --slide-safe:      var(--space-8);  /* margem de segurança 64px */
+  --section-py:      5rem;    /* [showcase] 80px vertical de seção */
+  --measure:         62ch;    /* [showcase] largura de leitura */
+  --measure-narrow:  54ch;    /* [showcase] texto em bloco escuro */
+  --rule-width:      64px;    /* [showcase] fio horizontal de marca */
+  --rule-color:      var(--neutral-300);
+
+  /* Breakpoints (referência; o único documentado é 780px) */
+  --bp-sm: 640px;   /* [EXT] */
+  --bp-md: 780px;   /* [showcase] única quebra do sistema */
+  --bp-lg: 1024px;  /* [EXT] */
+  --bp-xl: 1280px;  /* [EXT] */
+
+  /* Transições */
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --duration: 200ms;
+
+  /* ==========================================================
+     10. FOCO E ANEL DE ACESSIBILIDADE
+     ========================================================== */
+  --focus-ring-color:  var(--blue-400);
+  --focus-ring-width:  2px;
+  --focus-ring-offset: 2px;
+
+  /* ==========================================================
+     11. EXTENSÕES [EXT] — necessárias ao site, ausentes no DS.
+     Todas derivadas por coerência; ver "Lacunas" em
+     DESIGN-TOKENS.md antes de alterar qualquer valor abaixo.
+     ========================================================== */
+
+  /* Formulários */
+  --input-height-sm: 32px;
+  --input-height-md: 44px;   /* = altura do botão md */
+  --input-height-lg: 56px;
+  --input-padding-x: var(--space-4);
+  --input-radius:    var(--radius-sm);
+  /* Neutro 300 sobre branco mede 1,93:1 e reprova o mínimo de 3:1 exigido
+     para a borda que identifica um campo (WCAG 1.4.11). Neutro 400 → 3,10:1.
+     Pressupõe campo sobre --color-surface (branco), que é o caso em todo o site. */
+  --input-border:    var(--neutral-400);
+  --input-border-focus: var(--color-primary);
+  --input-bg:        var(--color-surface);
+  --input-bg-disabled: var(--neutral-100);
+  --input-placeholder: var(--neutral-400);
+  --field-label-gap: var(--space-2);
+  --field-error-color: var(--color-danger);
+  --field-error-size: var(--text-sm);
+
+  /* Tabelas */
+  --table-header-bg:     var(--neutral-50);
+  --table-header-color:  var(--neutral-600);
+  --table-row-border:    var(--color-border);
+  --table-row-hover-bg:  var(--green-50);
+  --table-cell-py:       var(--space-3);
+  --table-cell-px:       var(--space-4);
+
+  /* Slider (simuladores) */
+  --slider-track-h:      4px;
+  /* Neutro 200 deixava o preenchimento verde a 2,4:1 da trilha. Neutro 300
+     leva a separação preenchido/vazio a 3,33:1. */
+  --slider-track-bg:     var(--neutral-300);
+  /* Cor sólida: é o que a regra .halo-slider realmente pinta na trilha. */
+  --slider-track-fill:   var(--color-primary);
+  --slider-thumb-size:   24px;
+  --slider-thumb-bg:     var(--neutral-0);
+  --slider-thumb-border: 2px solid var(--color-primary);
+  --slider-thumb-shadow: var(--shadow-md);
+
+  /* Badges / tags */
+  --badge-height:    24px;
+  --badge-padding-x: var(--space-3);
+  --badge-radius:    var(--radius-full);
+  --badge-size:      var(--text-caption);
+  --badge-tracking:  var(--tracking-wide);
+
+  /* Navegação */
+  --nav-height:        80px;
+  --nav-bg:            var(--color-bg);
+  --nav-bg-scrolled:   rgb(var(--neutral-0-ch) / 0.92);
+  --nav-border:        var(--color-border);
+  --nav-link-color:    var(--neutral-700);
+  --nav-link-active:   var(--color-primary);
+
+  /* Sobreposição de imagem (capa/hero do template) */
+  --overlay-dark:  rgb(var(--neutral-800-ch) / 0.7);
+  /* O pé do scrim precisa aguentar a foto mais clara possível: com 0,85 a
+     legenda em ouro mede 4,08:1 sobre uma foto branca e reprova; com 0,92
+     vai a 5,14:1. */
+  --overlay-scrim: linear-gradient(180deg, rgb(var(--neutral-800-ch) / 0.15) 0%, rgb(var(--neutral-800-ch) / 0.92) 100%);
+
+  /* Ícones */
+  --icon-size-sm: 16px;
+  --icon-size-md: 20px;
+  --icon-size-lg: 24px;
+  --icon-size-xl: 28px;  /* [EXT] ícone dentro do círculo de 64px */
+  --icon-stroke:  2;
+
+  /* Logo nas peças de navegação. O mínimo do design system é 24px (§4). */
+  --logo-mark-header: 36px;
+  --logo-mark-menu:   32px;
+  --logo-mark-footer: 40px;
+  --logo-word-header: 24px;
+  --logo-word-menu:   22px;
+  --logo-word-footer: 26px;
+
+  /* Camadas */
+  --z-base: 0;
+  --z-sticky: 100;
+  --z-overlay: 200;
+  --z-modal: 300;
+  --z-toast: 400;
+
+  /* ==========================================================
+     12. MÉTRICAS DE COMPONENTE  [showcase]
+     Valores medidos em showcase.html que antes viviam soltos nos
+     componentes. Nomeá-los elimina literal visual do código sem
+     alterar nenhum valor do design system.
+     ========================================================== */
+  --btn-height-sm: 32px;
+  --btn-height-md: 44px;
+  --btn-height-lg: 56px;
+
+  --icon-circle-size: 64px;   /* feature__icon */
+  --icon-circle-gap:  18px;   /* margem sob o ícone de feature */
+  --avatar-size:      56px;   /* card de equipe sem foto */
+  --avatar-gap:       14px;
+  --rule-gap:         14px;   /* margem vertical do fio-régua */
+
+  --text-card-title:  1.25rem;   /* 20px — h3 dentro de card */
+  --text-card-body:   0.9375rem; /* 15px — corpo de card */
+  --text-team-name:   1.125rem;  /* 18px */
+  --text-block-title: 1.875rem;  /* 30px — h2 do bloco escuro */
+  --text-step-number: 2.125rem;  /* 34px */
+  --text-step-title:  1.0625rem; /* 17px */
+  --text-step-arrow:  1.375rem;  /* 22px */
+  --step-min-width:   160px;
+  --step-arrow-top:   30px;
+  /* Numeração "01 02 03". O verde 200 do showcase mede 1,82:1 sobre branco e
+     reprova o mínimo de 3:1 de texto grande; o verde 400 é o primeiro degrau
+     da mesma escala que passa (3,67:1). */
+  --color-step-number: var(--green-400);
+
+  --hero-title-size:  clamp(44px, 7vw, 72px);
+  --hero-title-leading: 1.02;
+  --hero-line-width:  120px;
+  --hero-line-height: 2px;
+  --hero-line-mt:     36px;
+  --hero-line-mb:     22px;
+  --hero-line-mt-end: 26px;
+  --hero-sub-mt:      14px;
+  /* Os dois halos radiais da capa (showcase .hero::after). */
+  --hero-halos:
+    radial-gradient(120% 120% at 80% 10%, rgb(var(--blue-500-ch) / 0.25), transparent 50%),
+    radial-gradient(120% 120% at 10% 90%, rgb(var(--gold-500-ch) / 0.18), transparent 45%);
+
+  /* ==========================================================
+     13. TOKENS DO SITE  [EXT]
+     Aliases e valores pedidos pela construção do site, todos
+     apontando para tokens já existentes ou derivados por coerência.
+     Registrados em "Lacunas" de DESIGN-TOKENS.md.
+     ========================================================== */
+
+  /* Aliases semânticos usados pela composição das seções */
+  --color-surface-alt: var(--color-bg-subtle);   /* neutro 50 */
+  --color-inverted:    var(--color-surface-dark); /* neutro 800 */
+  --color-focus:       var(--focus-ring-color);   /* azul 400 */
+  --color-focus-inverted: var(--gold-300);        /* anel visível sobre grafite */
+
+  /* Ritmo vertical de seção */
+  --section-py-mobile:  var(--space-7);   /* 48px */
+  --section-py-desktop: var(--section-py); /* 80px */
+
+  /* Motion — revelação no scroll.
+     O DS só define micro-interação (200ms). Reveal precisa de curva
+     de saída e distância própria. */
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --motion-reveal-duration: 600ms;
+  --motion-reveal-distance: 16px;
+  --motion-stagger: 80ms;
+  /* Micro-interações: o brilho do hover do botão vem do CSS de botoes.md §4. */
+  --hover-dim: 0.96;
+  --hover-zoom: 1.02;
+
+  /* Botão flutuante de WhatsApp */
+  --fab-offset: var(--space-5);
+  --fab-reveal-scroll: 600px;
+}

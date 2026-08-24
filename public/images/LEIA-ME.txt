@@ -1,0 +1,14 @@
+Estas imagens são PLACEHOLDERS gerados a partir dos assets de marca.
+Substitua cada arquivo por uma foto real mantendo o mesmo nome e a mesma proporção;
+o texto alternativo de cada uma fica em src/data/content.ts.
+
+Para regerar os placeholders: npm run generate:images
+
+projeto-fotovoltaico-residencial-telhado-ceramico.jpg — 800×600
+projeto-fotovoltaico-comercial-galpao.jpg — 800×600
+projeto-fotovoltaico-rural-usina-solo.jpg — 800×600
+projeto-armazenamento-banco-baterias.jpg — 800×600
+projeto-eletromobilidade-condominio.jpg — 800×600
+projeto-eletromobilidade-frota-corporativa.jpg — 800×600
+fotovoltaico-instalacao-modulos.jpg — 900×1100
+armazenamento-banco-baterias-sala-tecnica.jpg — 900×1100

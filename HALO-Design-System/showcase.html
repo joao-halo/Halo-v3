@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Halo — Design System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Outfit:wght@300..700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --halo-green:#006D40; --halo-blue:#3D7CBF; --halo-gold:#D4AF37;
+  --green-50:#E9F5EF; --green-100:#C8E6D6; --green-200:#92CDAC; --green-300:#34B277; --green-400:#08995A; --green-500:#006D40; --green-600:#005C36; --green-700:#00472A; --green-800:#00331E; --green-900:#002415;
+  --blue-50:#ECF3FA; --blue-100:#CFE0F1; --blue-200:#A4C4E4; --blue-300:#79A8D6; --blue-400:#5E92CC; --blue-500:#3D7CBF; --blue-600:#33669D; --blue-700:#29507C; --blue-800:#1F3B5B; --blue-900:#15273B;
+  --gold-50:#FBF6E7; --gold-100:#F5E9BE; --gold-200:#EBD485; --gold-300:#E1BF4D; --gold-400:#D9B23E; --gold-500:#D4AF37; --gold-600:#B0902C; --gold-700:#8A7122; --gold-800:#635119; --gold-900:#3D3210;
+  --neutral-0:#FFFFFF; --neutral-50:#F6F7F7; --neutral-100:#ECEDEE; --neutral-200:#D7D9DB; --neutral-300:#B7BBBE; --neutral-400:#8E9396; --neutral-500:#6B7073; --neutral-600:#4E5255; --neutral-700:#3A3E40; --neutral-800:#2A2D2F; --neutral-900:#1B1D1E; --neutral-950:#0F1011;
+  --gradient-brand:linear-gradient(135deg,#D4AF37 0%,#006D40 55%,#3D7CBF 100%);
+  --gradient-emerald:linear-gradient(135deg,#006D40 0%,#3D7CBF 100%);
+  --gradient-gold:linear-gradient(135deg,#D4AF37 0%,#006D40 100%);
+  --gradient-sun:linear-gradient(135deg,#D4AF37 0%,#3D7CBF 100%);
+  --gradient-dark:linear-gradient(135deg,#2A2D2F 0%,#00331E 100%);
+  --font-display:"Fraunces",Georgia,"Times New Roman",serif;
+  --font-body:"Outfit","Segoe UI",system-ui,sans-serif;
+  --font-brand:"Outfit","Segoe UI",system-ui,sans-serif;
+  --radius-md:8px; --radius-lg:16px; --radius-full:999px;
+  --shadow-sm:0 1px 2px rgba(15,16,17,.06); --shadow-md:0 4px 12px rgba(15,16,17,.08); --shadow-lg:0 12px 28px rgba(15,16,17,.12); --shadow-xl:0 24px 48px rgba(15,16,17,.16);
+  --ease:cubic-bezier(.4,0,.2,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-body);color:var(--neutral-900);background:var(--neutral-50);line-height:1.6;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{font-family:var(--font-display);font-optical-sizing:auto;line-height:1.15;letter-spacing:-.015em}
+.wrap{max-width:1120px;margin:0 auto;padding:0 32px}
+section{padding:80px 0;border-bottom:1px solid var(--neutral-200)}
+.overline{font-family:var(--font-brand);font-size:12px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--halo-green)}
+.sec-title{font-size:32px;font-weight:600;margin:8px 0 8px}
+.sec-desc{color:var(--neutral-500);max-width:62ch;margin-bottom:40px}
+.fio{height:1px;background:var(--neutral-300);border:0;width:64px;margin:14px 0}
+
+/* ---------- HERO / CAPA ---------- */
+.hero{background:var(--neutral-800);color:#fff;position:relative;overflow:hidden;border-bottom:none}
+.hero::after{content:"";position:absolute;inset:0;background:radial-gradient(120% 120% at 80% 10%,rgba(61,124,191,.25),transparent 50%),radial-gradient(120% 120% at 10% 90%,rgba(212,175,55,.18),transparent 45%)}
+.hero .wrap{position:relative;z-index:1;padding-top:90px;padding-bottom:90px}
+.hero .topbar{display:flex;justify-content:space-between;align-items:center;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.7)}
+.hero-line{height:2px;background:#fff;width:120px;margin:36px 0 22px;opacity:.9}
+.hero h1{font-size:clamp(44px,7vw,72px);font-weight:700;line-height:1.02}
+.hero p.sub{font-size:18px;color:rgba(255,255,255,.8);margin-top:14px;letter-spacing:.06em}
+
+/* ---------- LOGO ---------- */
+.halo-lockup{display:flex;flex-direction:column;align-items:center;gap:14px}
+.halo-ring{width:108px;height:108px;display:block}
+.halo-defs{position:absolute;width:0;height:0;overflow:hidden}
+.halo-word{font-family:var(--font-brand);font-weight:600;letter-spacing:-.01em;font-size:32px;color:var(--green-700)}
+.logo-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.logo-tile{display:grid;place-items:center;padding:48px;border-radius:var(--radius-lg);border:1px solid var(--neutral-200)}
+.logo-tile.dark{background:var(--neutral-800)} .logo-tile.dark .halo-word{color:#fff}
+
+/* ---------- SWATCHES ---------- */
+.brand-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:48px}
+.brand-card{border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-md);background:#fff}
+.brand-chip{height:150px;display:flex;align-items:flex-end;padding:16px;color:#fff;font-family:var(--font-display);font-weight:600}
+.brand-chip.on-dark{color:var(--neutral-900)}
+.brand-meta{padding:16px 18px}
+.brand-meta b{font-family:var(--font-display);display:block;font-size:15px}
+.brand-meta span{color:var(--neutral-500);font-size:13px}
+.brand-meta code{display:inline-block;margin-top:8px;font-size:13px;background:var(--neutral-100);padding:3px 8px;border-radius:4px;color:var(--neutral-700)}
+.scale-row{display:flex;border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-sm);margin-bottom:14px}
+.scale-cell{flex:1;height:64px;display:flex;align-items:flex-end;justify-content:center;padding-bottom:6px;font-size:11px;font-family:var(--font-brand);font-weight:600}
+.scale-label{font-size:13px;color:var(--neutral-600);width:64px;display:flex;align-items:center;font-weight:600;font-family:var(--font-brand)}
+.scale-line{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+.scale-line .scale-row{flex:1;margin:0}
+
+/* ---------- GRADIENTS ---------- */
+.grad-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px}
+.grad{height:110px;border-radius:var(--radius-lg);display:flex;align-items:flex-end;padding:14px;color:#fff;font-family:var(--font-display);font-weight:600;font-size:14px;box-shadow:var(--shadow-md)}
+
+/* ---------- TYPE ---------- */
+.type-row{display:flex;align-items:baseline;gap:24px;padding:14px 0;border-bottom:1px solid var(--neutral-100)}
+.type-row .tag{width:130px;flex:none;color:var(--neutral-500);font-size:13px;font-family:var(--font-brand)}
+.d-display,.d-h1,.d-h2,.d-h3{font-family:var(--font-display);font-optical-sizing:auto}
+.d-display{font-size:56px;font-weight:700} .d-h1{font-size:40px;font-weight:700} .d-h2{font-size:32px;font-weight:600}
+.d-h3{font-size:24px;font-weight:600} .d-body{font-size:16px} .d-small{font-size:14px;color:var(--neutral-500)}
+
+/* ---------- SPACING ---------- */
+.space-row{display:flex;align-items:center;gap:16px;margin-bottom:10px}
+.space-row .lbl{width:120px;font-size:13px;color:var(--neutral-600);font-family:var(--font-brand)}
+.space-bar{height:18px;background:var(--gradient-emerald);border-radius:4px}
+
+/* ---------- RADIUS + SHADOW ---------- */
+.demo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:24px}
+.demo-box{height:120px;background:#fff;border:1px solid var(--neutral-200);display:grid;place-items:center;font-size:13px;color:var(--neutral-500);font-family:var(--font-brand)}
+
+/* ---------- BUTTONS ---------- */
+.btn{font-family:var(--font-brand);font-weight:600;font-size:16px;border-radius:var(--radius-full);padding:12px 26px;border:2px solid transparent;cursor:pointer;transition:all .2s var(--ease)}
+.btn:hover{box-shadow:var(--shadow-md);filter:brightness(.96)}
+.btn--primary{background:var(--gradient-emerald);color:#fff}
+.btn--solid{background:var(--halo-green);color:#fff}
+.btn--secondary{background:var(--halo-blue);color:#fff}
+.btn--accent{background:var(--halo-gold);color:var(--neutral-900)}
+.btn--outline{background:transparent;border-color:var(--green-500);color:var(--green-700)}
+.btn--ghost{background:transparent;color:var(--green-700)}
+.btn-row{display:flex;flex-wrap:wrap;gap:16px;align-items:center}
+
+/* ---------- CARDS / COMPONENTS ---------- */
+.cols-3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.card{background:#fff;border-radius:var(--radius-md);box-shadow:var(--shadow-md);padding:32px;transition:box-shadow .2s var(--ease)}
+.card:hover{box-shadow:var(--shadow-lg)}
+.feature__icon{width:64px;height:64px;display:grid;place-items:center;border-radius:var(--radius-full);background:var(--green-50);color:var(--halo-green);margin-bottom:18px}
+.feature__icon.grad{background:var(--gradient-emerald);color:#fff}
+.card h3{font-size:20px;margin:6px 0 8px}
+.card p{color:var(--neutral-600);font-size:15px}
+.stat__value{font-family:var(--font-display);font-weight:700;font-size:42px;line-height:1}
+.stat__label{display:block;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--halo-gold);font-family:var(--font-brand);font-weight:600;margin:10px 0 6px}
+.block--dark{background:var(--gradient-dark);color:#fff;padding:48px;border-radius:var(--radius-lg)}
+.block--dark .overline{color:var(--halo-gold)}
+.block--dark h2{font-size:30px;margin:8px 0 10px}
+.block--dark p{color:rgba(255,255,255,.78);max-width:54ch}
+.process{display:flex;align-items:stretch;gap:0;flex-wrap:wrap}
+.step{flex:1;min-width:160px;padding:24px;position:relative}
+.step .num{font-family:var(--font-display);font-weight:700;font-size:34px;color:var(--green-200)}
+.step h4{font-size:17px;margin:6px 0 6px;color:var(--green-700)}
+.step p{font-size:14px;color:var(--neutral-600)}
+.step:not(:last-child)::after{content:"→";position:absolute;right:-8px;top:30px;color:var(--halo-gold);font-size:22px;font-weight:700}
+.avatar{width:56px;height:56px;border-radius:var(--radius-md);background:var(--gradient-sun);margin-bottom:14px}
+
+footer{padding:48px 0;text-align:center;color:var(--neutral-500);font-size:13px}
+@media(max-width:780px){.cols-3,.brand-grid,.logo-grid{grid-template-columns:1fr}.type-row{flex-direction:column;gap:4px}.type-row .tag{width:auto}}
+</style>
+</head>
+<body>
+
+<!-- Símbolo HALO — definição única, reutilizada via <use> -->
+<svg class="halo-defs" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="hg1" gradientUnits="userSpaceOnUse" x1="17.96" y1="31.5" x2="86.86" y2="46.77"><stop offset="0" stop-color="#D4AF37"/><stop offset="1" stop-color="#006D40"/></linearGradient>
+    <linearGradient id="hg2" gradientUnits="userSpaceOnUse" x1="86.86" y1="46.77" x2="40.42" y2="85.74"><stop offset="0" stop-color="#006D40"/><stop offset="1" stop-color="#3D7CBF"/></linearGradient>
+    <linearGradient id="hg3" gradientUnits="userSpaceOnUse" x1="40.42" y1="85.74" x2="13" y2="50"><stop offset="0" stop-color="#3D7CBF"/><stop offset="1" stop-color="#4F8FD0"/></linearGradient>
+    <symbol id="halo-mark" viewBox="0 0 100 100">
+      <g fill="none" stroke-width="13" stroke-linecap="round">
+        <path d="M17.96 31.5 A37 37 0 0 1 86.86 46.77" stroke="url(#hg1)"/>
+        <path d="M86.86 46.77 A37 37 0 0 1 40.42 85.74" stroke="url(#hg2)"/>
+        <path d="M40.42 85.74 A37 37 0 0 1 13 50" stroke="url(#hg3)"/>
+      </g>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- ===================== HERO ===================== -->
+<header class="hero">
+  <div class="wrap">
+    <div class="topbar"><span>Halo Design System</span><span>Business Template</span></div>
+    <div class="hero-line"></div>
+    <h1>Corporate</h1>
+    <p class="sub">DESIGN SYSTEM · v1.0</p>
+    <div class="hero-line" style="margin-top:26px"></div>
+  </div>
+</header>
+
+<!-- ===================== LOGO ===================== -->
+<section><div class="wrap">
+  <p class="overline">Marca</p>
+  <h2 class="sec-title">Logotipo</h2>
+  <p class="sec-desc">O anel HALO percorre o gradiente <em>Aurora</em> (ouro → verde → azul), símbolo de continuidade e energia limpa. Wordmark "Halo" em Outfit.</p>
+  <div class="logo-grid">
+    <div class="logo-tile"><div class="halo-lockup"><svg class="halo-ring" role="img" aria-label="Halo"><use href="#halo-mark"/></svg><div class="halo-word">Halo</div></div></div>
+    <div class="logo-tile dark"><div class="halo-lockup"><svg class="halo-ring" role="img" aria-label="Halo"><use href="#halo-mark"/></svg><div class="halo-word">Halo</div></div></div>
+  </div>
+</div></section>
+
+<!-- ===================== CORES ===================== -->
+<section><div class="wrap">
+  <p class="overline">Fundamentos</p>
+  <h2 class="sec-title">Paleta de cores</h2>
+  <p class="sec-desc">Três cores de marca sobre base neutra grafite. Verde conduz, azul apoia, ouro destaca.</p>
+
+  <div class="brand-grid">
+    <div class="brand-card">
+      <div class="brand-chip" style="background:var(--halo-gold);color:#1B1D1E">Amarelo Ouro</div>
+      <div class="brand-meta"><b>Amarelo Ouro</b><span>Gold Yellow · destaque</span><br><code>#D4AF37</code></div>
+    </div>
+    <div class="brand-card">
+      <div class="brand-chip" style="background:var(--halo-green)">Verde Esmeralda</div>
+      <div class="brand-meta"><b>Verde Esmeralda</b><span>Deep Emerald Green · primária</span><br><code>#006D40</code></div>
+    </div>
+    <div class="brand-card">
+      <div class="brand-chip" style="background:var(--halo-blue)">Azul Médio</div>
+      <div class="brand-meta"><b>Azul Médio</b><span>Medium Blue · secundária</span><br><code>#3D7CBF</code></div>
+    </div>
+  </div>
+
+  <div id="scales"></div>
+</div></section>
+
+<!-- ===================== GRADIENTES ===================== -->
+<section><div class="wrap">
+  <p class="overline">Fundamentos</p>
+  <h2 class="sec-title">Gradientes</h2>
+  <p class="sec-desc">Derivados do anel da marca. Use em superfícies grandes — capas, botões, blocos.</p>
+  <div class="grad-grid">
+    <div class="grad" style="background:var(--gradient-brand)">Aurora (marca)</div>
+    <div class="grad" style="background:var(--gradient-emerald)">Esmeralda (CTA)</div>
+    <div class="grad" style="background:var(--gradient-gold)">Ouro</div>
+    <div class="grad" style="background:var(--gradient-sun)">Sol</div>
+    <div class="grad" style="background:var(--gradient-dark)">Escuro</div>
+  </div>
+</div></section>
+
+<!-- ===================== TIPOGRAFIA ===================== -->
+<section><div class="wrap">
+  <p class="overline">Fundamentos</p>
+  <h2 class="sec-title">Tipografia</h2>
+  <p class="sec-desc">Fraunces (serifada) nos títulos, Outfit (sans) no corpo — inspiração editorial da Anthropic. Escala modular ~1.25.</p>
+  <div class="type-row"><span class="tag">Fraunces · 56</span><span class="d-display">Aa</span></div>
+  <div class="type-row"><span class="tag">Fraunces · 40</span><span class="d-h1">Energia mais limpa</span></div>
+  <div class="type-row"><span class="tag">Fraunces · 32</span><span class="d-h2">Título de seção</span></div>
+  <div class="type-row"><span class="tag">Fraunces · 24</span><span class="d-h3">Subtítulo de apoio</span></div>
+  <div class="type-row"><span class="tag">Outfit · 16</span><span class="d-body">Texto de corpo em Outfit, legível e neutro, para parágrafos e interface.</span></div>
+  <div class="type-row"><span class="tag">Outfit · 14</span><span class="d-small">Legenda, nota de rodapé ou crédito de imagem.</span></div>
+  <div class="type-row"><span class="tag">Outfit · 12</span><span class="overline">Creative Design</span></div>
+</div></section>
+
+<!-- ===================== ESPACAMENTO ===================== -->
+<section><div class="wrap">
+  <p class="overline">Fundamentos</p>
+  <h2 class="sec-title">Espaçamento</h2>
+  <p class="sec-desc">Escala base 8px. Use múltiplos para ritmo consistente.</p>
+  <div id="spacing"></div>
+</div></section>
+
+<!-- ===================== RAIO + SOMBRA ===================== -->
+<section><div class="wrap">
+  <p class="overline">Fundamentos</p>
+  <h2 class="sec-title">Raio &amp; Elevação</h2>
+  <p class="sec-desc">Caixas retas (corporativo) + botões pílula (marca). Sombras sutis e difusas.</p>
+  <div class="demo-grid" style="margin-bottom:32px">
+    <div class="demo-box" style="border-radius:0">raio 0</div>
+    <div class="demo-box" style="border-radius:8px">raio md · 8</div>
+    <div class="demo-box" style="border-radius:16px">raio lg · 16</div>
+    <div class="demo-box" style="border-radius:999px">pílula</div>
+  </div>
+  <div class="demo-grid">
+    <div class="demo-box" style="border:0;box-shadow:var(--shadow-sm)">shadow sm</div>
+    <div class="demo-box" style="border:0;box-shadow:var(--shadow-md)">shadow md</div>
+    <div class="demo-box" style="border:0;box-shadow:var(--shadow-lg)">shadow lg</div>
+    <div class="demo-box" style="border:0;box-shadow:var(--shadow-xl)">shadow xl</div>
+  </div>
+</div></section>
+
+<!-- ===================== BOTOES ===================== -->
+<section><div class="wrap">
+  <p class="overline">Componentes</p>
+  <h2 class="sec-title">Botões</h2>
+  <p class="sec-desc">Pílula, Outfit semibold. Sobre ouro o texto é escuro.</p>
+  <div class="btn-row">
+    <button class="btn btn--primary">Primário</button>
+    <button class="btn btn--solid">Sólido</button>
+    <button class="btn btn--secondary">Secundário</button>
+    <button class="btn btn--accent">Destaque</button>
+    <button class="btn btn--outline">Contorno</button>
+    <button class="btn btn--ghost">Fantasma</button>
+  </div>
+</div></section>
+
+<!-- ===================== FEATURES ===================== -->
+<section><div class="wrap">
+  <p class="overline">Componentes</p>
+  <h2 class="sec-title">Blocos de feature</h2>
+  <p class="sec-desc">Ícone em círculo + título + texto. Padrão de serviços do template.</p>
+  <div class="cols-3">
+    <div class="card"><div class="feature__icon grad">◆</div><h3>Eficiência</h3><p>Otimização de consumo com dados em tempo real.</p></div>
+    <div class="card"><div class="feature__icon">✦</div><h3>Sustentável</h3><p>Soluções de energia limpa para o seu negócio.</p></div>
+    <div class="card"><div class="feature__icon">●</div><h3>Confiável</h3><p>Operação contínua com monitoramento 24/7.</p></div>
+  </div>
+</div></section>
+
+<!-- ===================== ESTATISTICAS ===================== -->
+<section><div class="wrap">
+  <p class="overline">Componentes</p>
+  <h2 class="sec-title">Estatísticas</h2>
+  <p class="sec-desc">Número-herói em Fraunces (serif), rótulo em ouro. Combine verde, azul e ouro.</p>
+  <div class="cols-3">
+    <div class="card"><span class="stat__value" style="color:var(--halo-green)">190.729</span><span class="stat__label">Clientes atendidos</span><p>Texto curto de apoio à métrica apresentada.</p></div>
+    <div class="card"><span class="stat__value" style="color:var(--halo-blue)">98%</span><span class="stat__label">Satisfação</span><p>Texto curto de apoio à métrica apresentada.</p></div>
+    <div class="card"><span class="stat__value" style="color:var(--halo-gold)">2.058</span><span class="stat__label">Projetos entregues</span><p>Texto curto de apoio à métrica apresentada.</p></div>
+  </div>
+</div></section>
+
+<!-- ===================== EQUIPE ===================== -->
+<section><div class="wrap">
+  <p class="overline">Componentes</p>
+  <h2 class="sec-title">Equipe</h2>
+  <p class="sec-desc">Foto, nome, cargo (overline verde) e bio curta.</p>
+  <div class="cols-3">
+    <div class="card"><div class="avatar"></div><h3 style="font-size:18px">Ana Souza</h3><p class="overline">Diretora de Operações</p><p style="margin-top:8px">Lidera a operação com foco em eficiência.</p></div>
+    <div class="card"><div class="avatar" style="background:var(--gradient-emerald)"></div><h3 style="font-size:18px">Carlos Lima</h3><p class="overline">Head de Tecnologia</p><p style="margin-top:8px">Responsável pela plataforma de dados.</p></div>
+    <div class="card"><div class="avatar" style="background:var(--gradient-gold)"></div><h3 style="font-size:18px">Marina Reis</h3><p class="overline">Relações com Clientes</p><p style="margin-top:8px">Garante a melhor experiência ponta a ponta.</p></div>
+  </div>
+</div></section>
+
+<!-- ===================== BLOCO ESCURO ===================== -->
+<section><div class="wrap">
+  <p class="overline">Componentes</p>
+  <h2 class="sec-title">Bloco escuro</h2>
+  <p class="sec-desc">A "caixa charcoal" do template, com overline em ouro — cria ritmo e destaca chamadas.</p>
+  <div class="block--dark">
+    <p class="overline">Creative Design</p>
+    <h2>Pronto para uma energia mais inteligente?</h2>
+    <p>Combine confiabilidade e sustentabilidade com a plataforma HALO.</p>
+    <div style="margin-top:24px"><button class="btn btn--accent">Falar com a equipe</button></div>
+  </div>
+</div></section>
+
+<!-- ===================== PROCESSO ===================== -->
+<section style="border-bottom:none"><div class="wrap">
+  <p class="overline">Componentes</p>
+  <h2 class="sec-title">Linha de processo</h2>
+  <p class="sec-desc">Etapas numeradas com setas em ouro. Máximo de 3–5 passos.</p>
+  <div class="card" style="padding:8px">
+    <div class="process">
+      <div class="step"><div class="num">01</div><h4>Diagnóstico</h4><p>Mapeamos consumo e oportunidades.</p></div>
+      <div class="step"><div class="num">02</div><h4>Plano</h4><p>Desenhamos a solução sob medida.</p></div>
+      <div class="step"><div class="num">03</div><h4>Implantação</h4><p>Colocamos tudo em operação.</p></div>
+      <div class="step"><div class="num">04</div><h4>Otimização</h4><p>Monitoramos e melhoramos continuamente.</p></div>
+    </div>
+  </div>
+</div></section>
+
+<footer>Halo Design System · v1.0 · Fraunces + Outfit · #006D40 · #3D7CBF · #D4AF37</footer>
+
+<script>
+// Escalas tonais
+const scales = {
+  Verde:['#E9F5EF','#C8E6D6','#92CDAC','#34B277','#08995A','#006D40','#005C36','#00472A','#00331E','#002415'],
+  Azul:['#ECF3FA','#CFE0F1','#A4C4E4','#79A8D6','#5E92CC','#3D7CBF','#33669D','#29507C','#1F3B5B','#15273B'],
+  Ouro:['#FBF6E7','#F5E9BE','#EBD485','#E1BF4D','#D9B23E','#D4AF37','#B0902C','#8A7122','#635119','#3D3210'],
+  Neutro:['#F6F7F7','#ECEDEE','#D7D9DB','#B7BBBE','#8E9396','#6B7073','#4E5255','#3A3E40','#2A2D2F','#1B1D1E']
+};
+const steps=['50','100','200','300','400','500','600','700','800','900'];
+const sc=document.getElementById('scales');
+for(const [name,cols] of Object.entries(scales)){
+  const line=document.createElement('div');line.className='scale-line';
+  const lbl=document.createElement('div');lbl.className='scale-label';lbl.textContent=name;
+  const row=document.createElement('div');row.className='scale-row';
+  cols.forEach((c,i)=>{const cell=document.createElement('div');cell.className='scale-cell';cell.style.background=c;
+    cell.style.color=i>=5?'#fff':'#1B1D1E';cell.textContent=steps[i];row.appendChild(cell);});
+  line.appendChild(lbl);line.appendChild(row);sc.appendChild(line);
+}
+// Espaçamento
+const spaces=[['space-1 · 4',4],['space-2 · 8',8],['space-3 · 12',12],['space-4 · 16',16],['space-5 · 24',24],['space-6 · 32',32],['space-7 · 48',48],['space-8 · 64',64],['space-9 · 96',96]];
+const sp=document.getElementById('spacing');
+spaces.forEach(([name,px])=>{const r=document.createElement('div');r.className='space-row';
+  const l=document.createElement('div');l.className='lbl';l.textContent=name;
+  const b=document.createElement('div');b.className='space-bar';b.style.width=px+'px';
+  r.appendChild(l);r.appendChild(b);sp.appendChild(r);});
+</script>
+</body>
+</html>

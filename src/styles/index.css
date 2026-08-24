@@ -1,0 +1,151 @@
+/* ============================================================
+   HALO — folha raiz
+   Ordem: fontes → tokens → Tailwind → camada base.
+   ============================================================ */
+@import "./fonts.css";
+@import "./tokens.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  *,
+  *::before,
+  *::after { box-sizing: border-box; }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+    /* compensa o header sticky ao pular para uma âncora */
+    scroll-padding-top: var(--nav-height);
+  }
+
+  body {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    line-height: var(--leading-normal);
+    color: var(--color-text);
+    background: var(--color-bg);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-optical-sizing: auto;
+    line-height: var(--leading-tight);
+    letter-spacing: var(--tracking-heading);
+    margin: 0;
+  }
+
+  p { margin: 0; }
+
+  /* Anel de foco único do sistema (botoes.md §3). */
+  :focus-visible {
+    outline: var(--focus-ring-width) solid var(--color-focus);
+    outline-offset: var(--focus-ring-offset);
+  }
+
+  /* Sobre superfície grafite o azul 400 perde contraste: usa ouro 300. */
+  .on-inverted :focus-visible {
+    outline-color: var(--color-focus-inverted);
+  }
+
+  ::selection {
+    background: var(--green-100);
+    color: var(--green-900);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  /* ----------------------------------------------------------------
+     Slider dos simuladores  [EXT]
+     Trilha 4px, preenchimento em gradiente esmeralda até
+     --slider-progress, polegar branco com borda verde.
+     ---------------------------------------------------------------- */
+  .halo-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: var(--slider-thumb-size);
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .halo-slider::-webkit-slider-runnable-track {
+    height: var(--slider-track-h);
+    border-radius: var(--radius-full);
+    background:
+      linear-gradient(var(--color-primary), var(--color-primary)) 0 / var(--slider-progress) 100% no-repeat,
+      var(--slider-track-bg);
+  }
+
+  .halo-slider::-moz-range-track {
+    height: var(--slider-track-h);
+    border-radius: var(--radius-full);
+    background: var(--slider-track-bg);
+  }
+
+  .halo-slider::-moz-range-progress {
+    height: var(--slider-track-h);
+    border-radius: var(--radius-full);
+    background: var(--color-primary);
+  }
+
+  .halo-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: var(--slider-thumb-size);
+    height: var(--slider-thumb-size);
+    margin-top: calc((var(--slider-track-h) - var(--slider-thumb-size)) / 2);
+    border-radius: var(--radius-full);
+    background: var(--slider-thumb-bg);
+    border: var(--slider-thumb-border);
+    box-shadow: var(--slider-thumb-shadow);
+    transition: box-shadow var(--duration) var(--ease);
+  }
+
+  .halo-slider::-moz-range-thumb {
+    width: var(--slider-thumb-size);
+    height: var(--slider-thumb-size);
+    border-radius: var(--radius-full);
+    background: var(--slider-thumb-bg);
+    border: var(--slider-thumb-border);
+    box-shadow: var(--slider-thumb-shadow);
+  }
+
+  .halo-slider:hover::-webkit-slider-thumb,
+  .halo-slider:focus-visible::-webkit-slider-thumb {
+    box-shadow: var(--shadow-lg);
+  }
+
+  .halo-slider:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+}
+
+@layer utilities {
+  /* Ritmo vertical de seção: mobile → desktop. */
+  .py-section-rhythm {
+    padding-top: var(--section-py-mobile);
+    padding-bottom: var(--section-py-mobile);
+  }
+  @media (min-width: 780px) {
+    .py-section-rhythm {
+      padding-top: var(--section-py-desktop);
+      padding-bottom: var(--section-py-desktop);
+    }
+  }
+}

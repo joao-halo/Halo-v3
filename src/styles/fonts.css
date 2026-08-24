@@ -1,0 +1,18 @@
+/* ============================================================
+   HALO — FONTES
+   Fraunces (serifada) + Outfit (sans), ambas do Google Fonts
+   conforme HALO-Design-System/01-fundamentos/tipografia.md §1.
+   Não há arquivo de fonte na pasta de design, portanto não há
+   @font-face local a declarar.
+
+   O carregamento acontece em index.html via <link rel="preconnect">
+   + <link rel="preload" as="style"> + <link rel="stylesheet">, que
+   é mais rápido do que um @import daqui (o @import só é descoberto
+   depois que o CSS pai baixa). A URL é exatamente a documentada no
+   design system, com display=swap.
+   ============================================================ */
+
+/* Eixo óptico da Fraunces: títulos grandes ganham o corte display. */
+:where(h1, h2, h3, h4, .font-display) {
+  font-optical-sizing: auto;
+}

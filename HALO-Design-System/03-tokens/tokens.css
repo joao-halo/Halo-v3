@@ -1,0 +1,199 @@
+/* ============================================================
+   HALO — DESIGN TOKENS
+   Fonte única de verdade para cores, tipografia, espaçamento,
+   raios, sombras e gradientes do design system HALO.
+
+   Uso:  <link rel="stylesheet" href="03-tokens/tokens.css">
+   Depois consuma as variáveis:  color: var(--color-primary);
+   ============================================================ */
+
+:root {
+  /* --------------------------------------------------------
+     1. CORES DE MARCA (núcleo HALO)
+     -------------------------------------------------------- */
+  --halo-green: #006D40;   /* Verde Esmeralda — cor primária  */
+  --halo-blue:  #3D7CBF;   /* Azul Médio      — cor secundária */
+  --halo-gold:  #D4AF37;   /* Amarelo Ouro    — cor de destaque */
+
+  /* --------------------------------------------------------
+     2. ESCALAS DE COR
+     -------------------------------------------------------- */
+
+  /* Verde Esmeralda (primária) */
+  --green-50:  #E9F5EF;
+  --green-100: #C8E6D6;
+  --green-200: #92CDAC;
+  --green-300: #34B277;
+  --green-400: #08995A;
+  --green-500: #006D40;   /* base */
+  --green-600: #005C36;
+  --green-700: #00472A;
+  --green-800: #00331E;
+  --green-900: #002415;
+
+  /* Azul Médio (secundária) */
+  --blue-50:  #ECF3FA;
+  --blue-100: #CFE0F1;
+  --blue-200: #A4C4E4;
+  --blue-300: #79A8D6;
+  --blue-400: #5E92CC;
+  --blue-500: #3D7CBF;    /* base */
+  --blue-600: #33669D;
+  --blue-700: #29507C;
+  --blue-800: #1F3B5B;
+  --blue-900: #15273B;
+
+  /* Amarelo Ouro (destaque) */
+  --gold-50:  #FBF6E7;
+  --gold-100: #F5E9BE;
+  --gold-200: #EBD485;
+  --gold-300: #E1BF4D;
+  --gold-400: #D9B23E;
+  --gold-500: #D4AF37;    /* base */
+  --gold-600: #B0902C;
+  --gold-700: #8A7122;
+  --gold-800: #635119;
+  --gold-900: #3D3210;
+
+  /* Neutros (grafite — herdado do template corporativo) */
+  --neutral-0:   #FFFFFF;
+  --neutral-50:  #F6F7F7;
+  --neutral-100: #ECEDEE;
+  --neutral-200: #D7D9DB;
+  --neutral-300: #B7BBBE;
+  --neutral-400: #8E9396;
+  --neutral-500: #6B7073;
+  --neutral-600: #4E5255;
+  --neutral-700: #3A3E40;
+  --neutral-800: #2A2D2F;   /* charcoal do template */
+  --neutral-900: #1B1D1E;
+  --neutral-950: #0F1011;
+  --neutral-black: #000000;
+
+  /* --------------------------------------------------------
+     3. CORES SEMÂNTICAS (papéis)
+     -------------------------------------------------------- */
+  --color-primary:        var(--green-500);
+  --color-primary-hover:  var(--green-600);
+  --color-primary-soft:   var(--green-50);
+
+  --color-secondary:       var(--blue-500);
+  --color-secondary-hover: var(--blue-600);
+  --color-secondary-soft:  var(--blue-50);
+
+  --color-accent:        var(--gold-500);
+  --color-accent-hover:  var(--gold-600);
+  --color-accent-soft:   var(--gold-50);
+
+  /* Texto */
+  --color-text:          var(--neutral-900);
+  --color-text-muted:    var(--neutral-500);
+  --color-text-inverse:  var(--neutral-0);
+  --color-text-on-brand: var(--neutral-0);
+
+  /* Superfícies */
+  --color-bg:            var(--neutral-0);
+  --color-bg-subtle:     var(--neutral-50);
+  --color-surface:       var(--neutral-0);
+  --color-surface-dark:  var(--neutral-800);
+  --color-border:        var(--neutral-200);
+  --color-border-strong: var(--neutral-300);
+
+  /* Estado / feedback */
+  --color-success: #1F9159;
+  --color-success-soft: #E7F4EC;
+  --color-info:    var(--blue-500);
+  --color-info-soft: var(--blue-50);
+  --color-warning: var(--gold-500);
+  --color-warning-soft: var(--gold-50);
+  --color-danger:  #C8372D;
+  --color-danger-soft: #FBEAE8;
+
+  /* --------------------------------------------------------
+     4. GRADIENTES (assinatura HALO)
+     -------------------------------------------------------- */
+  --gradient-brand:   linear-gradient(135deg, #D4AF37 0%, #006D40 55%, #3D7CBF 100%); /* "Aurora" — logo */
+  --gradient-emerald: linear-gradient(135deg, #006D40 0%, #3D7CBF 100%);              /* CTA principal */
+  --gradient-gold:    linear-gradient(135deg, #D4AF37 0%, #006D40 100%);
+  --gradient-sun:     linear-gradient(135deg, #D4AF37 0%, #3D7CBF 100%);
+  --gradient-dark:    linear-gradient(135deg, #2A2D2F 0%, #00331E 100%);
+
+  /* --------------------------------------------------------
+     5. TIPOGRAFIA
+     Fraunces (serifada) nos títulos · Outfit (sans) no corpo.
+     --font-brand: wordmark "Halo", overlines e rótulos pequenos.
+     -------------------------------------------------------- */
+  --font-display: "Fraunces", Georgia, "Times New Roman", serif;      /* títulos (serif) */
+  --font-body:    "Outfit", "Segoe UI", system-ui, sans-serif;        /* corpo (sans)    */
+  --font-brand:   "Outfit", "Segoe UI", system-ui, sans-serif;        /* marca / rótulos */
+
+  /* Escala tipográfica (ratio ~1.25) */
+  --text-overline: 0.75rem;   /* 12px — rótulos "CREATIVE DESIGN" */
+  --text-caption:  0.75rem;   /* 12px */
+  --text-sm:       0.875rem;  /* 14px */
+  --text-base:     1rem;      /* 16px */
+  --text-lg:       1.125rem;  /* 18px */
+  --text-xl:       1.5rem;    /* 24px — H3 */
+  --text-2xl:      2rem;      /* 32px — H2 */
+  --text-3xl:      2.5rem;    /* 40px — H1 */
+  --text-4xl:      3.5rem;    /* 56px — Display */
+
+  --weight-light:    300;
+  --weight-regular:  400;
+  --weight-medium:   500;
+  --weight-semibold: 600;
+  --weight-bold:     700;
+
+  --leading-tight:   1.15;
+  --leading-snug:    1.3;
+  --leading-normal:  1.6;
+
+  --tracking-tight:   -0.02em;
+  --tracking-normal:  0;
+  --tracking-wide:    0.04em;
+  --tracking-overline: 0.18em;  /* rótulos em maiúsculas */
+
+  /* --------------------------------------------------------
+     6. ESPAÇAMENTO (base 8px)
+     -------------------------------------------------------- */
+  --space-1:  0.25rem;  /*  4px */
+  --space-2:  0.5rem;   /*  8px */
+  --space-3:  0.75rem;  /* 12px */
+  --space-4:  1rem;     /* 16px */
+  --space-5:  1.5rem;   /* 24px */
+  --space-6:  2rem;     /* 32px */
+  --space-7:  3rem;     /* 48px */
+  --space-8:  4rem;     /* 64px */
+  --space-9:  6rem;     /* 96px */
+  --space-10: 8rem;     /* 128px */
+
+  /* --------------------------------------------------------
+     7. RAIO DE BORDA
+     -------------------------------------------------------- */
+  --radius-none: 0;
+  --radius-sm:   4px;
+  --radius-md:   8px;
+  --radius-lg:   16px;
+  --radius-xl:   24px;
+  --radius-full: 999px;   /* botões pílula (referência HALO) */
+
+  /* --------------------------------------------------------
+     8. SOMBRAS / ELEVAÇÃO
+     -------------------------------------------------------- */
+  --shadow-sm: 0 1px 2px rgba(15, 16, 17, 0.06);
+  --shadow-md: 0 4px 12px rgba(15, 16, 17, 0.08);
+  --shadow-lg: 0 12px 28px rgba(15, 16, 17, 0.12);
+  --shadow-xl: 0 24px 48px rgba(15, 16, 17, 0.16);
+
+  /* --------------------------------------------------------
+     9. LAYOUT
+     -------------------------------------------------------- */
+  --container-max: 1200px;
+  --grid-columns: 12;
+  --grid-gutter: var(--space-5);
+  --slide-ratio: 16 / 9;
+
+  /* Transições */
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --duration: 200ms;
+}

@@ -1,0 +1,12 @@
+node_modules
+dist
+.env
+.env.local
+*.local
+.DS_Store
+
+# Configuração local do Claude Code (específica desta máquina)
+.claude/settings.local.json
+
+# Arquivos compactados do próprio projeto — não são código-fonte
+*.zip
