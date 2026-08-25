@@ -202,6 +202,28 @@ sem estado inicial escondido.
 
 ---
 
+## 6b. Erro desta auditoria, corrigido depois
+
+**A seção 3 afirmou que a hierarquia de títulos não tinha salto. Estava errado.**
+A verificação leu a sequência de tags como uma lista, sem testar cada transição.
+A seção "Como funciona" ia de `h2` direto para `h4`: `ProcessSteps` fixava
+`<h4>` no título de cada etapa, copiando o que `showcase.html` faz em `.step h4`.
+
+Pular um nível não reprova WCAG por si só, mas desmonta o sumário do documento
+para quem navega por títulos com leitor de tela, e enfraquece a leitura da página
+pelo buscador.
+
+Correção: `ProcessSteps` ganhou a prop `headingLevel`, com padrão `h3`. O nível
+semântico passou a acompanhar o contexto — dentro de uma seção cujo título é
+`h2`, a etapa é `h3` — e **o estilo visual não mudou**: segue Fraunces semibold,
+17px, verde 700, como o design system define. O design system determina a
+aparência do título, não o seu nível no documento.
+
+Verificado no navegador: um único `h1` e zero saltos na página inteira, agora
+com um teste que percorre cada transição em vez de inspecionar a lista.
+
+---
+
 ## 7. O que mudou
 
 **Tokens novos:** `--halo-ring-tip` · `--color-text-inverse-muted` ·

@@ -2,8 +2,10 @@ import { Check } from "lucide-react";
 import {
   Badge,
   ButtonLink,
+  Card,
   Container,
   Grid,
+  Heading,
   Overline,
   Reveal,
   Section,
@@ -88,6 +90,31 @@ export function Photovoltaic() {
             />
           </Reveal>
         </Grid>
+
+        <div className="mt-9">
+          <Reveal>
+            <Overline>{photovoltaic.complianceLabel}</Overline>
+            <Heading level="h3" as="h3" className="mt-2">
+              {photovoltaic.complianceTitle}
+            </Heading>
+          </Reveal>
+
+          <Grid cols="thirds" className="mt-5">
+            {photovoltaic.compliance.map((norm, index) => (
+              <Reveal key={norm.code} index={index}>
+                <Card as="article" className="h-full">
+                  <Badge tone="secondary">{norm.code}</Badge>
+                  <h4 className="font-display font-semibold text-[length:var(--text-card-title)] mt-4">
+                    {norm.name}
+                  </h4>
+                  <Text size="sm" tone="muted" className="mt-3">
+                    {norm.description}
+                  </Text>
+                </Card>
+              </Reveal>
+            ))}
+          </Grid>
+        </div>
       </Container>
     </Section>
   );

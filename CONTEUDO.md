@@ -80,8 +80,19 @@ As seis são fotos reais de obra, já recortadas para o formato do card.
 
 | Arquivo | Situação | O que a foto deve mostrar |
 |---|---|---|
-| `fotovoltaico-instalacao-modulos.jpg` | ⬜ placeholder | Equipe em obra instalando módulos |
+| `fotovoltaico-residencia-com-modulos.jpg` | ⚠️ imagem gerada | Residência com módulos no telhado, inversor e baterias na parede. **Ilustrativa** — ver nota abaixo |
 | `armazenamento-banco-baterias-sala-tecnica.jpg` | ⬜ placeholder | Banco de baterias com quadro de comando |
+
+> ⚠️ **A imagem da seção Geração Solar é gerada por IA.** Ela ilustra o serviço,
+> não documenta uma obra da Halo — por isso o texto alternativo descreve a cena
+> sem atribuí-la à empresa. Duas ressalvas:
+>
+> - **Não migre essa imagem para a seção "Halo Engenharia"**, que apresenta obras
+>   entregues. Lá, imagem gerada vira afirmação falsa sobre o portfólio.
+> - Recortar o selo visível **não remove o SynthID**, a marca invisível que o
+>   Google embute no arquivo. A origem continua detectável por quem verificar.
+>
+> Trocar por foto real de uma instalação residencial resolve as duas coisas.
 
 ### Como substituir
 

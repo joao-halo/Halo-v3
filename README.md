@@ -1,6 +1,6 @@
-# Halo Solar Energy — site
+# Halo Energy — site
 
-Site institucional de página única da **Halo Solar Energy** (Belo Horizonte – MG):
+Site institucional de página única da **Halo Energy** (Belo Horizonte – MG):
 sistemas fotovoltaicos, armazenamento de energia e infraestrutura de recarga para
 veículos elétricos.
 

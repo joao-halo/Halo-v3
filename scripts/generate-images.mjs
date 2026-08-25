@@ -264,7 +264,7 @@ const PLACEHOLDERS = [
   { file: "projeto-eletromobilidade-eletroposto.jpg", w: 800, h: 600, gradient: "brand" },
   { file: "projeto-operacao-manutencao.jpg", w: 800, h: 600, gradient: "emerald" },
   // imagens de seção — retrato
-  { file: "fotovoltaico-instalacao-modulos.jpg", w: 900, h: 1100, gradient: "emerald" },
+  { file: "fotovoltaico-residencia-com-modulos.jpg", w: 900, h: 1100, gradient: "emerald" },
   { file: "armazenamento-banco-baterias-sala-tecnica.jpg", w: 900, h: 1100, gradient: "dark" },
 ];
 

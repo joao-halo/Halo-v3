@@ -10,7 +10,7 @@ import { waMessages } from "./site";
 /* ---------------------------------------------------------------- Header */
 
 export const header = {
-  logoAlt: "Halo Solar Energy",
+  logoAlt: "Halo Energy",
   homeLabel: "Ir para o início",
   ctaLabel: "Solicitar proposta ↗",
   ctaMessage: waMessages.header,
@@ -152,11 +152,11 @@ export const solutionsSection = {
 export const photovoltaic = {
   id: "fotovoltaico",
   eyebrow: "GERAÇÃO SOLAR",
-  title: "Produzir a própria energia com projeto elétrico.",
+  title: "Painéis solares com segurança, confiabilidade e economia.",
   subtitle:
-    "Da leitura da conta à troca do medidor, com responsabilidade técnica em cada etapa.",
+    "Projeto, instalação e homologação em conformidade com a Lei 14.300 e com as normas ABNT de segurança e comissionamento.",
   paragraph:
-    "O sistema é definido pelo que a instalação consome e pelo que a estrutura suporta. Antes do módulo, vem o levantamento elétrico.",
+    "Economizar na conta de luz depende de duas coisas: um sistema dimensionado pelo consumo real e um projeto que passa na análise da distribuidora. Especificamos cada componente segundo a regulação vigente — do levantamento elétrico ao comissionamento documentado.",
   applicationsLabel: "APLICAÇÕES",
   applications: ["Residencial", "Comercial", "Industrial", "Rural"],
   items: [
@@ -186,9 +186,31 @@ export const photovoltaic = {
         "Leitura de geração por inversor e string, para identificar perda de desempenho cedo.",
     },
   ],
-  image: "/images/fotovoltaico-instalacao-modulos.jpg",
+  complianceLabel: "REGULAÇÃO E NORMAS",
+  complianceTitle: "O que sustenta o projeto.",
+  compliance: [
+    {
+      code: "Lei 14.300/2022",
+      name: "Marco legal da geração distribuída",
+      description:
+        "Institui as regras do Sistema de Compensação de Energia Elétrica — o mecanismo que permite abater da conta a energia que o seu sistema injeta na rede. É o que dá segurança jurídica ao investimento.",
+    },
+    {
+      code: "ABNT NBR 17193:2025",
+      name: "Segurança contra incêndio",
+      description:
+        "Define os requisitos de projeto contra incêndio em instalações fotovoltaicas em edificações: desligamento rápido, espaçamento para acesso do corpo de bombeiros e posicionamento seguro de cabos e dispositivos.",
+    },
+    {
+      code: "ABNT NBR 16274",
+      name: "Comissionamento e documentação",
+      description:
+        "Estabelece os ensaios, a inspeção e o relatório técnico que comprovam que o sistema foi entregue operando como projetado. É o documento que fica com você.",
+    },
+  ],
+  image: "/images/fotovoltaico-residencia-com-modulos.jpg",
   imageAlt:
-    "Técnico da Halo instalando módulos fotovoltaicos sobre estrutura metálica",
+    "Residência com telhado coberto por módulos fotovoltaicos, inversor e baterias instalados na parede lateral",
   imageWidth: 900,
   imageHeight: 1100,
   cta: { label: "Falar sobre geração solar ↗", message: waMessages.photovoltaic },
@@ -494,7 +516,7 @@ export const footer = {
     { label: "Eletromobilidade", href: "#eletromobilidade" },
     { label: "Simuladores", href: "#simuladores" },
   ],
-  copyright: "© 2026 Halo Solar Energy. Todos os direitos reservados.",
+  copyright: "© 2026 Halo Energy. Todos os direitos reservados.",
   backToTop: "Voltar ao topo ↑",
   instagramLabel: "Instagram",
 };

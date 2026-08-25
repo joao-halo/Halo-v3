@@ -15,9 +15,17 @@ export interface ProcessStep {
 
 export interface ProcessStepsProps extends React.HTMLAttributes<HTMLOListElement> {
   steps: ProcessStep[];
+  /**
+   * Nível semântico do título de cada etapa. O showcase usa `h4`, mas o nível
+   * certo depende de onde o componente é usado: dentro de uma seção cujo título
+   * é `h2`, pular para `h4` abre um buraco na hierarquia. O estilo visual é o
+   * mesmo em qualquer nível.
+   */
+  headingLevel?: "h3" | "h4" | "h5";
 }
 
-export function ProcessSteps({ steps, className, ...props }: ProcessStepsProps) {
+export function ProcessSteps({ steps, headingLevel = "h3", className, ...props }: ProcessStepsProps) {
+  const Heading = headingLevel as React.ElementType;
   return (
     <ol className={cn("flex flex-col md:flex-row md:flex-wrap items-stretch list-none m-0 p-0", className)} {...props}>
       {steps.map((step, i) => (
@@ -25,7 +33,9 @@ export function ProcessSteps({ steps, className, ...props }: ProcessStepsProps) 
           <div aria-hidden className="font-display font-bold text-[length:var(--text-step-number)] leading-none text-step">
             {step.number ?? String(i + 1).padStart(2, "0")}
           </div>
-          <h4 className="font-display font-semibold text-[length:var(--text-step-title)] text-green-700 mt-2 mb-2">{step.title}</h4>
+          <Heading className="font-display font-semibold text-[length:var(--text-step-title)] text-green-700 mt-2 mb-2">
+            {step.title}
+          </Heading>
           {step.description && <p className="font-body text-sm text-ink-muted">{step.description}</p>}
           {i < steps.length - 1 && (
             <span

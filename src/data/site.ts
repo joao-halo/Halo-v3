@@ -2,7 +2,7 @@
  * Dados institucionais e pontos de conversão.
  *
  * ⚠️ TODOS os campos marcados com PLACEHOLDER precisam ser substituídos
- * pelos dados reais da Halo Solar Energy antes de publicar.
+ * pelos dados reais da Halo Energy antes de publicar.
  * Ver CONTEUDO.md para a lista completa.
  */
 
@@ -10,7 +10,7 @@
 export const WHATSAPP_NUMBER = "5531997073141";
 
 export const site = {
-  name: "Halo Solar Energy",
+  name: "Halo Energy",
   legalName: "JVA Energia Inteligente Ltda.",
   cnpj: "45.357.408/0001-53",
   tagline: "Engenharia antes de venda.",
@@ -94,7 +94,7 @@ export const sectionIds = [
 
 export const seo = {
   title:
-    "Energia Solar, Armazenamento e Recarga de Veículos Elétricos em Belo Horizonte | Halo Solar Energy",
+    "Energia Solar, Armazenamento e Recarga de Veículos Elétricos em Belo Horizonte | Halo Energy",
   description:
     "Projeto e instalação de sistemas fotovoltaicos, armazenamento de energia e infraestrutura de recarga para veículos elétricos em Belo Horizonte e região metropolitana. Engenharia elétrica e homologação acompanhada.",
   ogImage: "/og.jpg",
