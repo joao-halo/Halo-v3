@@ -12,7 +12,12 @@ export function useCountUp(target: number, durationMs = 600): number {
   const frameRef = useRef<number>();
 
   useEffect(() => {
-    if (reduced) {
+    // Sem animação quando ninguém vê: requestAnimationFrame fica suspenso em aba
+    // de segundo plano, e o número ficaria parado no valor anterior até a aba
+    // voltar. Melhor mostrar o valor certo de imediato.
+    const hidden = typeof document !== "undefined" && document.visibilityState === "hidden";
+
+    if (reduced || hidden) {
       fromRef.current = target;
       setValue(target);
       return;

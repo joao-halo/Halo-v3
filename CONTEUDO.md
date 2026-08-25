@@ -148,13 +148,24 @@ são de referência e devem ser revisadas por engenharia antes de publicar:
 
 | Constante | Valor | O que é |
 |---|---|---|
-| `COMPENSATION_RATES` | 0,80 / 0,75 / 0,70 | Parcela da conta compensável por perfil |
-| `REFERENCE_TARIFF` | R$ 0,95/kWh | Tarifa usada para converter reais em energia |
+| `COMPENSATION_RATE` | 0,80 | Parcela da conta passível de compensação. Taxa única — o seletor de perfil saiu do simulador |
+| `TARIFF_DEFAULT` | R$ 0,95/kWh | Tarifa padrão dos dois simuladores. Agora é editável pelo visitante |
 | `SPECIFIC_YIELD` | 4,7 kWh/kWp/dia | Geração específica de referência da região |
-| `ANNUAL_ADJUSTMENT` | 8% ao ano | Reajuste assumido no horizonte de 25 anos |
-| `FUEL_PRICE_DEFAULT` | R$ 6,20/L | Preço de combustível padrão do simulador |
+| `PRICE_PER_WP` | **R$ 2,30/Wp** | Preço de referência do projeto, equivalente a R$ 2.300/kWp |
+| `PAYBACK_MIN_YEARS` / `MAX` | 2,5 a 3 anos | **Faixa declarada, não calculada** — ver nota abaixo |
+| `BILL_MIN` / `BILL_MAX` | R$ 200 a R$ 2.000 | Faixa do slider de conta |
+| `FUEL_PRICE_DEFAULT` | R$ 6,20/L | Preço de combustível padrão |
 | `FUEL_EFFICIENCY_DEFAULT` | 11 km/L | Eficiência padrão do carro a combustão |
 | `VEHICLE_CONSUMPTION` | 14 / 17 / 20 / 24 kWh/100 km | Consumo por porte de veículo |
+
+> ⚠️ **O payback exibido não fecha com a aritmética das outras constantes.**
+> Com preço de R$ 2,30/Wp e compensação de 80%, o retorno calculado dá cerca de
+> **1,8 ano** — abaixo da faixa de 2,5 a 3 anos apresentada. A diferença não é
+> erro de conta: é que a economia real não é 80% cheios da conta, e o cálculo não
+> considera custos de operação. Por isso o payback aparece como faixa declarada,
+> e não como número derivado — evita mostrar uma precisão que as premissas não
+> sustentam. Para os dois números conversarem, a engenharia precisa revisar a
+> taxa de compensação ou o preço por Wp.
 
 Mudou a tarifa ou a regra de compensação? Ajuste aqui e rode `npm run test` —
 os testes conferem a coerência entre as fórmulas.

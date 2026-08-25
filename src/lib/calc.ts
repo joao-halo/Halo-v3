@@ -9,49 +9,54 @@
    Simulador A — economia com geração solar
    ============================================================ */
 
-export type ConsumerProfile = "residential" | "commercial" | "industrial";
-
-/** Parcela da conta passível de compensação, por perfil. */
-export const COMPENSATION_RATES: Record<ConsumerProfile, number> = {
-  residential: 0.8,
-  commercial: 0.75,
-  industrial: 0.7,
-};
-
-/** Tarifa de referência usada para converter reais em energia. */
-export const REFERENCE_TARIFF = 0.95; // R$/kWh
+/** Parcela da conta passível de compensação pela geração própria. */
+export const COMPENSATION_RATE = 0.8;
 
 /** Geração específica de referência para a região. */
 export const SPECIFIC_YIELD = 4.7; // kWh por kWp por dia
 export const DAYS_PER_MONTH = 30;
 
-/** Reajuste anual de energia assumido no horizonte longo. */
-export const ANNUAL_ADJUSTMENT = 0.08;
-export const HORIZON_YEARS = 25;
+/**
+ * Preço de referência do projeto, em R$ por Wp instalado.
+ * Equivale a R$ 2.300 por kWp.
+ */
+export const PRICE_PER_WP = 2.3;
+
+/**
+ * Faixa de retorno do investimento apresentada na simulação.
+ * É uma faixa declarada, não um número calculado: o payback real depende do
+ * preço fechado, da tarifa da distribuidora e do perfil de consumo.
+ */
+export const PAYBACK_MIN_YEARS = 2.5;
+export const PAYBACK_MAX_YEARS = 3;
 
 /** Limites do slider de conta média. */
 export const BILL_MIN = 200;
-export const BILL_MAX = 10_000;
+export const BILL_MAX = 2_000;
 export const BILL_STEP = 50;
 export const BILL_DEFAULT = 800;
+
+/** Tarifa de energia usada por padrão nos dois simuladores. */
+export const TARIFF_DEFAULT = 0.95; // R$/kWh
+export const TARIFF_MIN = 0.3;
+export const TARIFF_MAX = 2;
 
 export interface SavingsInput {
   /** Conta média mensal em reais. */
   bill: number;
-  profile: ConsumerProfile;
+  /** Tarifa de energia em R$/kWh. */
+  tariff: number;
 }
 
 export interface SavingsResult {
   /** Economia mensal estimada, em reais. */
   monthly: number;
-  /** Economia acumulada em 12 meses, sem reajuste. */
-  yearly: number;
-  /** Economia acumulada em 25 anos, com reajuste anual composto. */
-  horizon: number;
-  /** Potência estimada do sistema, em kWp. */
-  powerKwp: number;
   /** Consumo mensal implícito na conta informada, em kWh. */
   monthlyKwh: number;
+  /** Potência estimada do sistema, em kWp. */
+  powerKwp: number;
+  /** Valor de referência do projeto, em reais. */
+  projectValue: number;
 }
 
 /** Mantém a entrada dentro dos limites do slider. */
@@ -61,30 +66,23 @@ export function clampBill(bill: number): number {
   return Math.min(BILL_MAX, Math.max(BILL_MIN, bill));
 }
 
-/**
- * Soma de uma progressão geométrica de `years` parcelas anuais,
- * a primeira igual a `firstYear` e razão (1 + rate).
- *
- *   S = a · ((1 + r)^n − 1) / r
- */
-export function geometricSum(firstYear: number, rate: number, years: number): number {
-  if (years <= 0) return 0;
-  if (rate === 0) return firstYear * years;
-  return (firstYear * (Math.pow(1 + rate, years) - 1)) / rate;
+/** Tarifa fora de faixa distorce a potência estimada; satura nos limites. */
+export function clampTariff(tariff: number): number {
+  if (Number.isNaN(tariff)) return TARIFF_DEFAULT;
+  return Math.min(TARIFF_MAX, Math.max(TARIFF_MIN, tariff));
 }
 
-export function calculateSavings({ bill, profile }: SavingsInput): SavingsResult {
+export function calculateSavings({ bill, tariff }: SavingsInput): SavingsResult {
   const safeBill = clampBill(bill);
-  const rate = COMPENSATION_RATES[profile];
+  const safeTariff = clampTariff(tariff);
 
-  const monthly = safeBill * rate;
-  const yearly = monthly * 12;
-  const horizon = geometricSum(yearly, ANNUAL_ADJUSTMENT, HORIZON_YEARS);
-
-  const monthlyKwh = safeBill / REFERENCE_TARIFF;
+  const monthly = safeBill * COMPENSATION_RATE;
+  const monthlyKwh = safeBill / safeTariff;
   const powerKwp = monthlyKwh / (SPECIFIC_YIELD * DAYS_PER_MONTH);
+  // R$/Wp × 1000 Wp/kWp × kWp
+  const projectValue = PRICE_PER_WP * 1_000 * powerKwp;
 
-  return { monthly, yearly, horizon, powerKwp, monthlyKwh };
+  return { monthly, monthlyKwh, powerKwp, projectValue };
 }
 
 /* ============================================================
@@ -106,7 +104,6 @@ export const DISTANCE_MAX = 4_000;
 export const DISTANCE_STEP = 50;
 export const DISTANCE_DEFAULT = 1_200;
 
-export const TARIFF_DEFAULT = 0.95; // R$/kWh
 export const FUEL_PRICE_DEFAULT = 6.2; // R$/L
 export const FUEL_EFFICIENCY_DEFAULT = 11; // km/L
 

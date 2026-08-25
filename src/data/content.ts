@@ -406,33 +406,31 @@ export const process = {
 export const simulators = {
   id: "simuladores",
   eyebrow: "SIMULADORES",
-  title: "Ordem de grandeza antes da conversa.",
+  title: "Faça uma simulação do seu projeto.",
   subtitle:
-    "Duas estimativas rápidas para situar o projeto. A análise técnica vem depois.",
+    "Duas estimativas rápidas para situar a ordem de grandeza. A análise técnica vem depois.",
   tabsLabel: "Escolha o simulador",
   tabs: [
     { id: "savings", label: "Economia solar" },
     { id: "ev", label: "Recarga de veículo elétrico" },
   ],
   disclaimer:
-    "Estimativa de referência. O resultado real depende do consumo, da tarifa da distribuidora, da irradiação local e das condições do imóvel. A Halo realiza análise técnica antes de qualquer proposta.",
+    "Estimativa de referência, sem validade comercial. O resultado real depende do consumo, da tarifa da distribuidora, da irradiação local e das condições do imóvel. Nenhum número aqui constitui proposta: a Halo faz análise técnica antes de qualquer orçamento.",
   savings: {
     title: "Economia com geração solar",
     billLabel: "Conta de energia média por mês",
     billHint: "Arraste para ajustar. Use as setas do teclado para precisão.",
-    profileLabel: "Perfil da unidade consumidora",
-    profiles: [
-      { id: "residential", label: "Residencial" },
-      { id: "commercial", label: "Comercial" },
-      { id: "industrial", label: "Industrial" },
-    ],
-    results: [
-      { key: "monthly", label: "Economia mensal estimada" },
-      { key: "yearly", label: "Em 12 meses" },
-      { key: "horizon", label: "Em 25 anos, com reajuste de 8% ao ano" },
-      { key: "power", label: "Potência estimada do sistema" },
-    ],
-    cta: { label: "Quero uma análise real ↗", message: waMessages.savingsSimulator },
+    tariffLabel: "Tarifa de energia (R$/kWh)",
+    tariffHint: "Consulte o valor na sua conta de luz. O padrão é uma referência regional.",
+    results: {
+      monthly: "Economia mensal estimada",
+      payback: "Payback estimado",
+      power: "Potência estimada do sistema",
+      projectValue: "Valor de referência do projeto",
+    },
+    notice:
+      "Simulação sem validade comercial. Os valores são de referência e não constituem proposta — fale com um consultor da Halo para receber um orçamento baseado na sua conta e no seu imóvel.",
+    cta: { label: "Falar com um consultor ↗", message: waMessages.savingsSimulator },
   },
   ev: {
     title: "Custo de recarga contra combustível",

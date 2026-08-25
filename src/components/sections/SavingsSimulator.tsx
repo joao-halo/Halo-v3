@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { Button, ButtonLink, Card, Grid, Overline, Slider, Text } from "../ui";
+import { ButtonLink, Card, Field, Grid, Input, Slider, Text } from "../ui";
 import { simulators } from "../../data/content";
 import { waLink } from "../../data/site";
 import {
@@ -7,10 +7,12 @@ import {
   BILL_MAX,
   BILL_MIN,
   BILL_STEP,
+  PAYBACK_MAX_YEARS,
+  PAYBACK_MIN_YEARS,
+  TARIFF_DEFAULT,
   calculateSavings,
-  type ConsumerProfile,
 } from "../../lib/calc";
-import { formatCurrency, formatKwp } from "../../lib/format";
+import { formatCurrency, formatDecimal, formatKwp } from "../../lib/format";
 import { useCountUp } from "../../hooks/useCountUp";
 
 const content = simulators.savings;
@@ -29,7 +31,11 @@ function AnimatedStat({
 }) {
   const animated = useCountUp(value);
   const toneClass =
-    tone === "primary" ? "text-primary" : tone === "secondary" ? "text-secondary" : "text-accent-on-light";
+    tone === "primary"
+      ? "text-primary"
+      : tone === "secondary"
+        ? "text-secondary"
+        : "text-accent-on-light";
 
   return (
     <div>
@@ -46,12 +52,30 @@ function AnimatedStat({
   );
 }
 
+/** Indicador de valor fixo — não conta, porque não é número calculado. */
+function StaticStat({ value, label }: { value: string; label: string }) {
+  return (
+    <div>
+      <span className="block font-display font-bold text-3xl leading-none text-secondary">
+        {value}
+      </span>
+      <span className="block font-brand text-overline font-semibold tracking-overline uppercase text-accent-on-light mt-3">
+        {label}
+      </span>
+    </div>
+  );
+}
+
 /** 9a. Simulador de economia com geração solar. */
 export function SavingsSimulator() {
   const [bill, setBill] = useState(BILL_DEFAULT);
-  const [profile, setProfile] = useState<ConsumerProfile>("residential");
+  const [tariff, setTariff] = useState(TARIFF_DEFAULT);
 
-  const result = useMemo(() => calculateSavings({ bill, profile }), [bill, profile]);
+  const result = useMemo(() => calculateSavings({ bill, tariff }), [bill, tariff]);
+
+  // inteiro sai sem casa decimal: "2,5 a 3 anos", não "2,5 a 3,0 anos"
+  const anos = (n: number) => (Number.isInteger(n) ? String(n) : formatDecimal(n));
+  const paybackRange = `${anos(PAYBACK_MIN_YEARS)} a ${anos(PAYBACK_MAX_YEARS)}`;
 
   return (
     <div className="grid gap-gutter lg:grid-cols-2 items-start">
@@ -67,7 +91,7 @@ export function SavingsSimulator() {
           </p>
           <Slider
             id="savings-bill"
-            className="mt-4"
+            className="halo-slider--heat mt-4"
             value={bill}
             min={BILL_MIN}
             max={BILL_MAX}
@@ -85,60 +109,52 @@ export function SavingsSimulator() {
           </Text>
         </div>
 
-        <div className="mt-7">
-          <Overline as="div" id="savings-profile-label">
-            {content.profileLabel}
-          </Overline>
-          <div
-            role="group"
-            aria-labelledby="savings-profile-label"
-            className="flex flex-wrap gap-3 mt-3"
-          >
-            {content.profiles.map((option) => {
-              const selected = option.id === profile;
-              return (
-                <Button
-                  key={option.id}
-                  size="sm"
-                  variant={selected ? "solid" : "outline"}
-                  aria-pressed={selected}
-                  onClick={() => setProfile(option.id as ConsumerProfile)}
-                >
-                  {option.label}
-                </Button>
-              );
-            })}
-          </div>
-        </div>
+        <Field
+          id="savings-tariff"
+          label={content.tariffLabel}
+          hint={content.tariffHint}
+          className="mt-7"
+        >
+          <Input
+            id="savings-tariff"
+            type="number"
+            inputMode="decimal"
+            min={0}
+            step={0.01}
+            value={tariff}
+            onChange={(event) => setTariff(Number(event.target.value))}
+          />
+        </Field>
       </Card>
 
       <Card padding="lg" interactive={false}>
         <Grid cols="halves">
           <AnimatedStat
             value={result.monthly}
-            label={content.results[0].label}
+            label={content.results.monthly}
             format={formatCurrency}
             tone="primary"
           />
-          <AnimatedStat
-            value={result.yearly}
-            label={content.results[1].label}
-            format={formatCurrency}
-            tone="secondary"
-          />
-          <AnimatedStat
-            value={result.horizon}
-            label={content.results[2].label}
-            format={formatCurrency}
-            tone="accent"
-          />
+          <StaticStat value={`${paybackRange} anos`} label={content.results.payback} />
           <AnimatedStat
             value={result.powerKwp}
-            label={content.results[3].label}
+            label={content.results.power}
             format={formatKwp}
             tone="primary"
           />
+          <AnimatedStat
+            value={result.projectValue}
+            label={content.results.projectValue}
+            format={formatCurrency}
+            tone="accent"
+          />
         </Grid>
+
+        <div className="mt-7 border-l-btn border-secondary bg-secondary-soft rounded-sm p-4">
+          <Text size="sm" className="text-blue-800">
+            {content.notice}
+          </Text>
+        </div>
 
         <ButtonLink
           variant="primary"
@@ -147,7 +163,7 @@ export function SavingsSimulator() {
           href={waLink(content.cta.message)}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-7"
+          className="mt-5"
         >
           {content.cta.label}
         </ButtonLink>

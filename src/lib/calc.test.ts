@@ -1,22 +1,23 @@
 import { describe, expect, it } from "vitest";
 import {
-  ANNUAL_ADJUSTMENT,
   BILL_DEFAULT,
   BILL_MAX,
   BILL_MIN,
   CHARGER_THRESHOLDS,
-  COMPENSATION_RATES,
+  COMPENSATION_RATE,
   DAYS_PER_MONTH,
   DISTANCE_MAX,
   DISTANCE_MIN,
-  HORIZON_YEARS,
-  REFERENCE_TARIFF,
+  PRICE_PER_WP,
   SPECIFIC_YIELD,
+  TARIFF_DEFAULT,
+  TARIFF_MAX,
+  TARIFF_MIN,
   calculateEv,
   calculateSavings,
   clampBill,
   clampDistance,
-  geometricSum,
+  clampTariff,
   recommendCharger,
 } from "./calc";
 
@@ -40,84 +41,94 @@ describe("clampBill", () => {
     expect(clampBill(1_000_000)).toBe(BILL_MAX);
   });
 
-  it("devolve o mínimo para entrada não numérica", () => {
+  it("devolve o mínimo para entrada não numérica e satura no infinito", () => {
     expect(clampBill(Number.NaN)).toBe(BILL_MIN);
     expect(clampBill(Number.POSITIVE_INFINITY)).toBe(BILL_MAX);
+    expect(clampBill(Number.NEGATIVE_INFINITY)).toBe(BILL_MIN);
   });
 });
 
-describe("geometricSum", () => {
-  it("soma uma progressão geométrica de duas parcelas", () => {
-    // 100 + 108 = 208
-    expect(geometricSum(100, 0.08, 2)).toBeCloseTo(208, 6);
+describe("clampTariff", () => {
+  it("mantém a tarifa informada dentro da faixa", () => {
+    expect(clampTariff(TARIFF_DEFAULT)).toBe(TARIFF_DEFAULT);
+    expect(clampTariff(1.4)).toBe(1.4);
   });
 
-  it("vira soma simples quando a razão é zero", () => {
-    expect(geometricSum(100, 0, 5)).toBe(500);
+  it("trava nos extremos", () => {
+    expect(clampTariff(0)).toBe(TARIFF_MIN);
+    expect(clampTariff(99)).toBe(TARIFF_MAX);
   });
 
-  it("é zero para horizonte não positivo", () => {
-    expect(geometricSum(100, 0.08, 0)).toBe(0);
-    expect(geometricSum(100, 0.08, -3)).toBe(0);
+  it("cai no padrão quando a entrada não é numérica", () => {
+    expect(clampTariff(Number.NaN)).toBe(TARIFF_DEFAULT);
   });
 });
 
 describe("calculateSavings", () => {
-  it("aplica a taxa de compensação de cada perfil", () => {
-    const bill = 1_000;
-    expect(calculateSavings({ bill, profile: "residential" }).monthly).toBeCloseTo(800, 6);
-    expect(calculateSavings({ bill, profile: "commercial" }).monthly).toBeCloseTo(750, 6);
-    expect(calculateSavings({ bill, profile: "industrial" }).monthly).toBeCloseTo(700, 6);
+  it("aplica a taxa única de compensação sobre a conta", () => {
+    const r = calculateSavings({ bill: 1_000, tariff: TARIFF_DEFAULT });
+    expect(r.monthly).toBeCloseTo(1_000 * COMPENSATION_RATE, 6);
   });
 
-  it("deriva a economia anual da mensal", () => {
-    const result = calculateSavings({ bill: 800, profile: "residential" });
-    expect(result.yearly).toBeCloseTo(result.monthly * 12, 6);
+  it("converte a conta em consumo pela tarifa informada", () => {
+    const r = calculateSavings({ bill: 950, tariff: 0.95 });
+    expect(r.monthlyKwh).toBeCloseTo(1_000, 6);
   });
 
-  it("acumula 25 anos com reajuste composto de 8%", () => {
-    const result = calculateSavings({ bill: 800, profile: "residential" });
-    const expected =
-      (result.yearly * (Math.pow(1 + ANNUAL_ADJUSTMENT, HORIZON_YEARS) - 1)) / ANNUAL_ADJUSTMENT;
-    expect(result.horizon).toBeCloseTo(expected, 6);
-  });
-
-  it("o horizonte de 25 anos supera a soma sem reajuste", () => {
-    const result = calculateSavings({ bill: 800, profile: "residential" });
-    expect(result.horizon).toBeGreaterThan(result.yearly * HORIZON_YEARS);
-  });
-
-  it("estima a potência pela tarifa e pela geração específica de referência", () => {
-    const bill = 950; // 1.000 kWh/mês na tarifa de referência
-    const result = calculateSavings({ bill, profile: "residential" });
-    expect(result.monthlyKwh).toBeCloseTo(bill / REFERENCE_TARIFF, 6);
-    expect(result.powerKwp).toBeCloseTo(
-      bill / REFERENCE_TARIFF / (SPECIFIC_YIELD * DAYS_PER_MONTH),
+  it("estima a potência pela geração específica de referência", () => {
+    const r = calculateSavings({ bill: 800, tariff: TARIFF_DEFAULT });
+    expect(r.powerKwp).toBeCloseTo(
+      800 / TARIFF_DEFAULT / (SPECIFIC_YIELD * DAYS_PER_MONTH),
       6,
     );
   });
 
+  it("calcula o valor do projeto a R$/Wp sobre a potência", () => {
+    const r = calculateSavings({ bill: 800, tariff: TARIFF_DEFAULT });
+    expect(r.projectValue).toBeCloseTo(PRICE_PER_WP * 1_000 * r.powerKwp, 6);
+  });
+
+  it("o valor do projeto fica em ordem de grandeza de milhares de reais", () => {
+    const r = calculateSavings({ bill: BILL_DEFAULT, tariff: TARIFF_DEFAULT });
+    expect(r.projectValue).toBeGreaterThan(5_000);
+    expect(r.projectValue).toBeLessThan(50_000);
+  });
+
+  it("tarifa menor implica sistema maior para a mesma conta", () => {
+    const barata = calculateSavings({ bill: 800, tariff: 0.6 });
+    const cara = calculateSavings({ bill: 800, tariff: 1.2 });
+    expect(barata.powerKwp).toBeGreaterThan(cara.powerKwp);
+    expect(barata.projectValue).toBeGreaterThan(cara.projectValue);
+  });
+
+  it("a economia mensal não depende da tarifa, só da conta", () => {
+    const a = calculateSavings({ bill: 800, tariff: 0.6 });
+    const b = calculateSavings({ bill: 800, tariff: 1.2 });
+    expect(a.monthly).toBeCloseTo(b.monthly, 6);
+  });
+
   it("cresce de forma monotônica com a conta", () => {
-    const low = calculateSavings({ bill: BILL_MIN, profile: "residential" });
-    const high = calculateSavings({ bill: BILL_MAX, profile: "residential" });
-    expect(high.monthly).toBeGreaterThan(low.monthly);
-    expect(high.powerKwp).toBeGreaterThan(low.powerKwp);
+    const baixa = calculateSavings({ bill: BILL_MIN, tariff: TARIFF_DEFAULT });
+    const alta = calculateSavings({ bill: BILL_MAX, tariff: TARIFF_DEFAULT });
+    expect(alta.monthly).toBeGreaterThan(baixa.monthly);
+    expect(alta.powerKwp).toBeGreaterThan(baixa.powerKwp);
+    expect(alta.projectValue).toBeGreaterThan(baixa.projectValue);
   });
 
   it("trava nos extremos do slider", () => {
-    const belowMin = calculateSavings({ bill: 0, profile: "residential" });
-    const atMin = calculateSavings({ bill: BILL_MIN, profile: "residential" });
-    expect(belowMin).toEqual(atMin);
-
-    const aboveMax = calculateSavings({ bill: 99_999, profile: "industrial" });
-    const atMax = calculateSavings({ bill: BILL_MAX, profile: "industrial" });
-    expect(aboveMax).toEqual(atMax);
+    expect(calculateSavings({ bill: 0, tariff: TARIFF_DEFAULT })).toEqual(
+      calculateSavings({ bill: BILL_MIN, tariff: TARIFF_DEFAULT }),
+    );
+    expect(calculateSavings({ bill: 99_999, tariff: TARIFF_DEFAULT })).toEqual(
+      calculateSavings({ bill: BILL_MAX, tariff: TARIFF_DEFAULT }),
+    );
   });
 
-  it("no máximo residencial devolve os valores esperados", () => {
-    const result = calculateSavings({ bill: BILL_MAX, profile: "residential" });
-    expect(result.monthly).toBeCloseTo(BILL_MAX * COMPENSATION_RATES.residential, 6);
-    expect(result.yearly).toBeCloseTo(BILL_MAX * COMPENSATION_RATES.residential * 12, 6);
+  it("trava a tarifa fora de faixa em vez de estourar a potência", () => {
+    const zero = calculateSavings({ bill: 800, tariff: 0 });
+    const minima = calculateSavings({ bill: 800, tariff: TARIFF_MIN });
+    expect(zero).toEqual(minima);
+    expect(Number.isFinite(zero.powerKwp)).toBe(true);
   });
 });
 

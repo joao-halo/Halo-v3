@@ -130,6 +130,30 @@
     box-shadow: var(--shadow-lg);
   }
 
+  /* ----------------------------------------------------------------
+     Variante de temperatura: a trilha inteira carrega o gradiente
+     azul → ouro, e um retângulo neutro cobre o trecho ainda não
+     percorrido. Assim a cor sob o polegar corresponde ao valor, em vez
+     de comprimir o gradiente dentro da parte preenchida.
+     ---------------------------------------------------------------- */
+  .halo-slider--heat::-webkit-slider-runnable-track {
+    background:
+      linear-gradient(var(--slider-track-bg), var(--slider-track-bg))
+        right / calc(100% - var(--slider-progress)) 100% no-repeat,
+      var(--slider-heat);
+  }
+
+  .halo-slider--heat::-moz-range-track {
+    background:
+      linear-gradient(var(--slider-track-bg), var(--slider-track-bg))
+        right / calc(100% - var(--slider-progress)) 100% no-repeat,
+      var(--slider-heat);
+  }
+
+  .halo-slider--heat::-moz-range-progress {
+    background: transparent;
+  }
+
   .halo-slider:disabled {
     opacity: 0.45;
     cursor: not-allowed;

@@ -436,6 +436,7 @@ sistema, e estão em `src/styles/tokens.css` nas seções 12 e 13, marcadas `[EX
 | **Rodapé** | bloco neutro 800, logo invertido, overlines em ouro, links neutro 300 | É o "Encerramento / Contato" de `padroes-de-slide.md` §9 traduzido para web |
 | **Botão flutuante** | `--fab-offset` 24px, aparece após `--fab-reveal-scroll` 600px | Usa o botão sólido do sistema; nada de forma nova |
 | **Métricas de componente** | `--btn-height-*`, `--icon-circle-size`, `--avatar-size`, `--text-card-title`, `--text-step-number`, `--hero-title-size`… | Valores que o showcase define e que estavam soltos no código como literais. Nomeá-los cumpre a regra "nenhum valor visual literal em componente" sem mudar um único número |
+| **Trilha de temperatura do slider** | `--slider-heat`: `linear-gradient(90deg, var(--blue-500), var(--gold-500))` | O simulador de economia pede uma trilha que esquenta conforme a conta cresce. **A paleta da marca não tem laranja**, e trazer um seria estilo estranho ao sistema. O ouro é a ponta quente do HALO, e o design system já emparelha exatamente azul e ouro em `--gradient-sun` — aqui na ordem inversa. A trilha é contexto: quem identifica o valor é o polegar, a 6,44:1 contra o card |
 | **Canais RGB** | `--<cor>-ch: R G B` ao lado de cada hex | Necessário para `bg-primary/60` no Tailwind. Reexpressa valores existentes, não cria nenhum |
 
 ### Fechadas na auditoria (tarefa 3)

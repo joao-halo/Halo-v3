@@ -342,6 +342,10 @@
   --slider-thumb-bg:     var(--neutral-0);
   --slider-thumb-border: 2px solid var(--color-primary);
   --slider-thumb-shadow: var(--shadow-md);
+  /* [EXT] Trilha de temperatura do simulador de economia: frio → quente
+     conforme a conta cresce. Usa as duas pontas cromáticas da marca — as
+     mesmas de --gradient-sun, na ordem inversa. A paleta não tem laranja. */
+  --slider-heat: linear-gradient(90deg, var(--blue-500) 0%, var(--gold-500) 100%);
 
   /* Badges / tags */
   --badge-height:    24px;
