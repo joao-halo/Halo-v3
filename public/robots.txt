@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
 
-# PLACEHOLDER — trocar pelo domínio de produção.
-Sitemap: https://www.halosolarenergy.com.br/sitemap.xml
+Sitemap: https://www.haloenergy.com.br/sitemap.xml

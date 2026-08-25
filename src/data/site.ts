@@ -11,14 +11,12 @@ export const WHATSAPP_NUMBER = "5531997073141";
 
 export const site = {
   name: "Halo Solar Energy",
-  /** PLACEHOLDER — razão social registrada. */
-  legalName: "PLACEHOLDER — Razão Social Ltda.",
-  /** PLACEHOLDER — CNPJ. */
-  cnpj: "PLACEHOLDER — 00.000.000/0001-00",
+  legalName: "JVA Energia Inteligente Ltda.",
+  cnpj: "45.357.408/0001-53",
   tagline: "Engenharia antes de venda.",
   positioning:
     "Projeto, execução e homologação de sistemas de energia em Belo Horizonte e região metropolitana.",
-  url: "https://www.halosolarenergy.com.br", // PLACEHOLDER — domínio de produção
+  url: "https://www.haloenergy.com.br",
   city: "Belo Horizonte",
   state: "MG",
   stateName: "Minas Gerais",

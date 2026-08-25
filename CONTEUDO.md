@@ -14,14 +14,14 @@ Enquanto um item desta lista não for resolvido, o site não deve ser publicado.
 | Campo | Valor atual | O que colocar |
 |---|---|---|
 | ~~`WHATSAPP_NUMBER`~~ | ✅ `5531997073141` | **Preenchido** — +55 31 99707-3141. Alimenta todos os CTAs e o botão flutuante |
-| `site.legalName` | `PLACEHOLDER — Razão Social Ltda.` | Razão social registrada, como aparece no contrato social |
-| `site.cnpj` | `PLACEHOLDER — 00.000.000/0001-00` | CNPJ formatado |
+| ~~`site.legalName`~~ | ✅ `JVA Energia Inteligente Ltda.` | **Preenchido** |
+| ~~`site.cnpj`~~ | ✅ `45.357.408/0001-53` | **Preenchido** |
 | ~~`site.phone`~~ | ✅ `+55 31 99707-3141` | **Preenchido** — mesmo número do WhatsApp. Se surgir uma linha fixa separada, troque só este campo e o `phoneHref` |
 | ~~`site.phoneHref`~~ | ✅ `+5531997073141` | **Preenchido** |
 | ~~`site.email`~~ | ✅ `contato@haloenergy.com.br` | **Preenchido** |
 | ~~`site.instagram`~~ | ✅ `https://instagram.com/halosolarpower` | **Preenchido** |
 | ~~`site.instagramHandle`~~ | ✅ `@halosolarpower` | **Preenchido** |
-| `site.url` | `https://www.halosolarenergy.com.br` | ⚠️ **Conferir.** O e-mail da empresa é `@haloenergy.com.br`, sem o "solar" — o domínio do site provavelmente é `haloenergy.com.br`. Enquanto não confirmado, ficou como está. Ver a seção 2 |
+| ~~`site.url`~~ | ✅ `https://www.haloenergy.com.br` | **Preenchido.** Forma `www` porque o apex redireciona para ela |
 | `site.openingHours` | `Segunda a sexta, 8h às 18h` | Horário real de atendimento |
 
 ### Endereço — `site.address`
@@ -43,28 +43,23 @@ ponto e copie o par de números.
 
 ---
 
-## 2. Domínio — quatro arquivos que mudam juntos
+## 2. Domínio — resolvido
 
-> ⚠️ **Pendência aberta.** O e-mail comercial confirmado é
-> `contato@haloenergy.com.br`, mas o domínio provisório do site é
-> `halosolarenergy.com.br`. Os dois não batem. Se o domínio real for
-> `haloenergy.com.br`, os quatro arquivos abaixo precisam ser trocados juntos —
-> canonical, Open Graph, `robots.txt` e `sitemap.xml` apontando para um endereço
-> errado quebram a indexação e o cartão de compartilhamento.
+O domínio de produção é **`https://www.haloenergy.com.br`**. Usamos a forma com
+`www` porque o apex (`haloenergy.com.br`) redireciona para ela — o canonical
+precisa apontar para o endereço que de fato serve a página, senão o Google indexa
+o destino errado.
 
-O domínio provisório `https://www.halosolarenergy.com.br` aparece em:
+Já está aplicado nos quatro lugares que precisam andar juntos:
 
 | Arquivo | Onde |
 |---|---|
 | `index.html` | `<link rel="canonical">`, `og:url`, `og:image`, `twitter:image` |
 | `public/robots.txt` | linha `Sitemap:` |
-| `public/sitemap.xml` | `<loc>` e `<lastmod>` (colocar a data da publicação) |
+| `public/sitemap.xml` | `<loc>` e `<lastmod>` |
 | `src/data/site.ts` | `site.url` |
 
-Se o domínio final for outro, os quatro precisam ser atualizados — senão o cartão
-de compartilhamento e a indexação apontam para um endereço que não existe.
-
----
+> Se um dia o site passar a servir no apex em vez de `www`, os quatro mudam juntos.
 
 ## 3. Imagens — `public/images/`
 
@@ -159,8 +154,8 @@ os testes conferem a coerência entre as fórmulas.
 
 - [x] WhatsApp real em `WHATSAPP_NUMBER` — falta testar o link num celular
 - [x] Telefone, e-mail e Instagram preenchidos
-- [ ] Razão social, CNPJ e endereço preenchidos
-- [ ] Domínio de produção confirmado (`haloenergy.com.br` ou `halosolarenergy.com.br`)
+- [x] Razão social e CNPJ preenchidos
+- [ ] Endereço completo (rua, número, bairro, CEP)
 - [ ] Coordenadas da sede corrigidas no `site.geo`
 - [ ] Domínio atualizado nos quatro arquivos
 - [x] Seis fotos reais nos cards da seção Halo Engenharia
