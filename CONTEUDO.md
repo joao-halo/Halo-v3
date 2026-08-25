@@ -68,19 +68,41 @@ de compartilhamento e a indexação apontam para um endereço que não existe.
 
 ## 3. Imagens — `public/images/`
 
-Todas são **placeholders de marca**, não fotos. Substituir mantendo nome e proporção.
-O texto alternativo de cada uma fica em `src/data/content.ts`.
+### Seção "Halo Engenharia" — cards 800×600 (4:3)
 
-| Arquivo | Dimensão | O que a foto deve mostrar |
+As seis são fotos reais de obra, já recortadas para o formato do card.
+
+| Arquivo | Situação | O que mostra |
 |---|---|---|
-| `projeto-fotovoltaico-residencial-telhado-ceramico.jpg` | 800×600 | Módulos instalados sobre telhado cerâmico residencial |
-| `projeto-fotovoltaico-comercial-galpao.jpg` | 800×600 | Usina sobre cobertura metálica de galpão |
-| `projeto-fotovoltaico-rural-usina-solo.jpg` | 800×600 | Usina em estrutura de solo, propriedade rural |
-| `projeto-armazenamento-banco-baterias.jpg` | 800×600 | Banco de baterias e inversor híbrido em sala técnica |
-| `projeto-eletromobilidade-condominio.jpg` | 800×600 | Carregadores instalados em garagem de condomínio |
-| `projeto-eletromobilidade-frota-corporativa.jpg` | 800×600 | Estação de recarga para frota em pátio corporativo |
-| `fotovoltaico-instalacao-modulos.jpg` | 900×1100 | Equipe em obra instalando módulos |
-| `armazenamento-banco-baterias-sala-tecnica.jpg` | 900×1100 | Banco de baterias com quadro de comando |
+| `projeto-fotovoltaico-residencial.jpg` | ✅ foto real | Sistema em telhado cerâmico residencial |
+| `projeto-fotovoltaico-comercial.jpg` | ✅ foto real | Usina em estrutura de solo, em encosta |
+| `projeto-fotovoltaico-ci.jpg` | ✅ foto real | Usina de grande porte em campo aberto |
+| `projeto-baterias-armazenamento.jpg` | ✅ foto real | Inversor híbrido e infraestrutura |
+| `projeto-eletromobilidade-eletroposto.jpg` | ✅ foto real | Eletroposto com carregadores e vagas |
+| `projeto-operacao-manutencao.jpg` | ✅ foto real | Inspeção termográfica de módulos em campo |
+
+### Imagens de seção — 900×1100 (retrato)
+
+| Arquivo | Situação | O que a foto deve mostrar |
+|---|---|---|
+| `fotovoltaico-instalacao-modulos.jpg` | ⬜ placeholder | Equipe em obra instalando módulos |
+| `armazenamento-banco-baterias-sala-tecnica.jpg` | ⬜ placeholder | Banco de baterias com quadro de comando |
+
+### Como substituir
+
+Deixe o arquivo com **o mesmo nome** e **a mesma proporção** (4:3 nos cards,
+retrato nas de seção) em `public/images/`, e revise o `alt` correspondente em
+`src/data/content.ts`.
+
+Se a foto vier do celular, dois cuidados:
+
+- **HEIC não abre em navegador.** Converta: `sips -s format jpeg "Foto.HEIC" --out foto.jpg`
+- **A conversão pode perder a orientação** e sair deitada. Confira antes de subir;
+  para girar: `sips -r 90 foto.jpg` (90, 180 ou 270).
+
+`npm run generate:images` **não sobrescreve** foto já colocada — só preenche o que
+estiver faltando. Para regerar todos os placeholders do zero:
+`npm run generate:images -- --force`.
 
 > Se a foto mostrar rosto de cliente ou o interior de um imóvel identificável,
 > guarde a autorização de uso de imagem antes de publicar.
@@ -141,7 +163,8 @@ os testes conferem a coerência entre as fórmulas.
 - [ ] Domínio de produção confirmado (`haloenergy.com.br` ou `halosolarenergy.com.br`)
 - [ ] Coordenadas da sede corrigidas no `site.geo`
 - [ ] Domínio atualizado nos quatro arquivos
-- [ ] Oito fotos substituídas, com `alt` revisado
+- [x] Seis fotos reais nos cards da seção Halo Engenharia
+- [ ] Duas imagens de seção ainda em placeholder (fotovoltaico e armazenamento)
 - [ ] Endpoint do formulário configurado (ou decisão consciente de usar só WhatsApp)
 - [ ] FAQ revisada por engenharia
 - [ ] Premissas dos simuladores validadas

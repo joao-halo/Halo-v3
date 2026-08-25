@@ -13,6 +13,7 @@
  * Uso: npm run generate:images
  */
 
+import { existsSync } from "node:fs";
 import { mkdir, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -255,41 +256,59 @@ function placeholderSvg({ width, height, gradient, ringScale = 0.72 }) {
 }
 
 const PLACEHOLDERS = [
-  // cards de projeto — 4:3
-  { file: "projeto-fotovoltaico-residencial-telhado-ceramico.jpg", w: 800, h: 600, gradient: "sun" },
-  { file: "projeto-fotovoltaico-comercial-galpao.jpg", w: 800, h: 600, gradient: "emerald" },
-  { file: "projeto-fotovoltaico-rural-usina-solo.jpg", w: 800, h: 600, gradient: "gold" },
-  { file: "projeto-armazenamento-banco-baterias.jpg", w: 800, h: 600, gradient: "dark" },
-  { file: "projeto-eletromobilidade-condominio.jpg", w: 800, h: 600, gradient: "brand" },
-  { file: "projeto-eletromobilidade-frota-corporativa.jpg", w: 800, h: 600, gradient: "emerald" },
+  // cards da seção "Halo Engenharia" — 4:3
+  { file: "projeto-fotovoltaico-residencial.jpg", w: 800, h: 600, gradient: "sun" },
+  { file: "projeto-fotovoltaico-comercial.jpg", w: 800, h: 600, gradient: "emerald" },
+  { file: "projeto-fotovoltaico-ci.jpg", w: 800, h: 600, gradient: "gold" },
+  { file: "projeto-baterias-armazenamento.jpg", w: 800, h: 600, gradient: "dark" },
+  { file: "projeto-eletromobilidade-eletroposto.jpg", w: 800, h: 600, gradient: "brand" },
+  { file: "projeto-operacao-manutencao.jpg", w: 800, h: 600, gradient: "emerald" },
   // imagens de seção — retrato
   { file: "fotovoltaico-instalacao-modulos.jpg", w: 900, h: 1100, gradient: "emerald" },
   { file: "armazenamento-banco-baterias-sala-tecnica.jpg", w: 900, h: 1100, gradient: "dark" },
 ];
 
-async function generatePlaceholders() {
+/**
+ * Gera um placeholder para cada imagem que AINDA NÃO EXISTE.
+ *
+ * Foto real colocada na pasta nunca é sobrescrita — rodar o script de novo
+ * depois de trocar uma imagem é seguro. Use `--force` para regerar tudo.
+ */
+async function generatePlaceholders({ force = false } = {}) {
   const written = [];
+  const kept = [];
+
   for (const item of PLACEHOLDERS) {
+    const target = `public/images/${item.file}`;
+    if (!force && existsSync(join(root, target))) {
+      kept.push(target);
+      continue;
+    }
     const svg = placeholderSvg({ width: item.w, height: item.h, gradient: item.gradient });
-    await writeJpeg(svg, `public/images/${item.file}`, { width: item.w, height: item.h });
-    written.push(`public/images/${item.file}`);
+    await writeJpeg(svg, target, { width: item.w, height: item.h });
+    written.push(target);
   }
-  return written;
+
+  return { written, kept };
 }
 
 /* ------------------------------------------------------------ main */
 
+const force = process.argv.includes("--force");
+
 const og = await generateOg();
-const placeholders = await generatePlaceholders();
+const { written, kept } = await generatePlaceholders({ force });
 
 await writeFile(
   join(root, "public/images/LEIA-ME.txt"),
   [
-    "Estas imagens são PLACEHOLDERS gerados a partir dos assets de marca.",
-    "Substitua cada arquivo por uma foto real mantendo o mesmo nome e a mesma proporção;",
-    "o texto alternativo de cada uma fica em src/data/content.ts.",
+    "Algumas destas imagens são PLACEHOLDERS gerados a partir dos assets de marca;",
+    "outras já são fotos reais de obra. Para trocar um placeholder por foto real,",
+    "substitua o arquivo mantendo o mesmo nome e a mesma proporção (4:3 nos cards,",
+    "retrato nas imagens de seção). O texto alternativo fica em src/data/content.ts.",
     "",
-    "Para regerar os placeholders: npm run generate:images",
+    "Rodar `npm run generate:images` NÃO sobrescreve foto que já existe.",
+    "Para regerar todos os placeholders do zero: npm run generate:images -- --force",
     "",
     ...PLACEHOLDERS.map((item) => `${item.file} — ${item.w}×${item.h}`),
   ].join("\n"),
@@ -297,4 +316,5 @@ await writeFile(
 );
 
 console.log(`gerado: ${og}`);
-for (const file of placeholders) console.log(`gerado: ${file}`);
+for (const file of written) console.log(`gerado: ${file}`);
+for (const file of kept) console.log(`preservado (já existe): ${file}`);
