@@ -134,19 +134,19 @@ describe("clampDistance", () => {
 });
 
 describe("recommendCharger", () => {
-  it("recomenda 7,4 kW até o limite baixo, inclusive", () => {
-    expect(recommendCharger(0)).toBe("ac-7.4");
-    expect(recommendCharger(CHARGER_THRESHOLDS.low)).toBe("ac-7.4");
+  it("recomenda o wallbox de 7,4 kW até o limite baixo, inclusive", () => {
+    expect(recommendCharger(0)).toBe("wallbox-7.4");
+    expect(recommendCharger(CHARGER_THRESHOLDS.low)).toBe("wallbox-7.4");
   });
 
-  it("recomenda 11 kW na faixa intermediária, inclusive o limite", () => {
-    expect(recommendCharger(CHARGER_THRESHOLDS.low + 0.1)).toBe("ac-11");
-    expect(recommendCharger(CHARGER_THRESHOLDS.medium)).toBe("ac-11");
+  it("recomenda o wallbox de 22 kW na faixa intermediária, inclusive o limite", () => {
+    expect(recommendCharger(CHARGER_THRESHOLDS.low + 0.1)).toBe("wallbox-22");
+    expect(recommendCharger(CHARGER_THRESHOLDS.medium)).toBe("wallbox-22");
   });
 
-  it("recomenda 22 kW ou DC acima do limite intermediário", () => {
-    expect(recommendCharger(CHARGER_THRESHOLDS.medium + 0.1)).toBe("ac-22-or-dc");
-    expect(recommendCharger(100)).toBe("ac-22-or-dc");
+  it("recomenda carregador rápido acima do limite intermediário", () => {
+    expect(recommendCharger(CHARGER_THRESHOLDS.medium + 0.1)).toBe("rapido");
+    expect(recommendCharger(100)).toBe("rapido");
   });
 });
 
@@ -198,18 +198,18 @@ describe("calculateEv", () => {
     expect(Number.isFinite(result.combustionCostPerKm)).toBe(true);
   });
 
-  it("no mínimo do slider recomenda o carregador de 7,4 kW", () => {
+  it("no mínimo do slider recomenda o wallbox de 7,4 kW", () => {
     const result = calculateEv({ ...base, distanceKm: DISTANCE_MIN, consumptionKwh100: 14 });
     // 200 km × 14 / 100 = 28 kWh/mês ≈ 0,93 kWh/dia
     expect(result.dailyEnergyKwh).toBeLessThan(CHARGER_THRESHOLDS.low);
-    expect(result.charger.id).toBe("ac-7.4");
+    expect(result.charger.id).toBe("wallbox-7.4");
   });
 
-  it("no máximo do slider com picape recomenda 22 kW ou DC", () => {
+  it("no máximo do slider com picape recomenda carregador rápido", () => {
     const result = calculateEv({ ...base, distanceKm: DISTANCE_MAX, consumptionKwh100: 24 });
     // 4.000 km × 24 / 100 = 960 kWh/mês = 32 kWh/dia
     expect(result.dailyEnergyKwh).toBeCloseTo(32, 6);
-    expect(result.charger.id).toBe("ac-22-or-dc");
+    expect(result.charger.id).toBe("rapido");
   });
 
   it("trava a quilometragem fora da faixa do slider", () => {

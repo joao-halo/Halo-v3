@@ -111,28 +111,29 @@ export const FUEL_PRICE_DEFAULT = 6.2; // R$/L
 export const FUEL_EFFICIENCY_DEFAULT = 11; // km/L
 
 /** Potência de carregador sugerida a partir da energia reposta por dia. */
-export type ChargerId = "ac-7.4" | "ac-11" | "ac-22-or-dc";
+export type ChargerId = "wallbox-7.4" | "wallbox-22" | "rapido";
 
 export const CHARGER_THRESHOLDS = {
-  /** Até 8 kWh/dia → AC 7,4 kW. */
+  /** Até 8 kWh/dia → wallbox de 7,4 kW. */
   low: 8,
-  /** Até 20 kWh/dia → AC 11 kW. */
+  /** Até 20 kWh/dia → wallbox de 22 kW (11 kW por veículo). */
   medium: 20,
 } as const;
 
 export const CHARGERS: Record<ChargerId, { label: string; detail: string }> = {
-  "ac-7.4": {
-    label: "AC 7,4 kW",
-    detail: "Monofásico. Reposição noturna suficiente para a rotina informada.",
+  "wallbox-7.4": {
+    label: "Wallbox 7,4 kW",
+    detail: "Reposição noturna em 220 V dá conta da rotina informada.",
   },
-  "ac-11": {
-    label: "AC 11 kW",
-    detail: "Trifásico. Recarga completa em janela noturna mesmo com uso intenso.",
-  },
-  "ac-22-or-dc": {
-    label: "AC 22 kW ou DC",
+  "wallbox-22": {
+    label: "Wallbox 22 kW",
     detail:
-      "Demanda diária alta: exige trifásico de maior potência ou recarga em corrente contínua.",
+      "Trifásico 380 V, com autotransformador na maioria das instalações. Entrega 11 kW por veículo, em duas saídas.",
+  },
+  rapido: {
+    label: "Carregador rápido",
+    detail:
+      "Demanda diária alta. A escolha entre wallbox de 22 kW e recarga em corrente contínua depende do tempo de parada disponível.",
   },
 };
 
@@ -172,9 +173,9 @@ export function clampDistance(distance: number): number {
 
 /** Regra de recomendação a partir da energia reposta por dia. */
 export function recommendCharger(dailyEnergyKwh: number): ChargerId {
-  if (dailyEnergyKwh <= CHARGER_THRESHOLDS.low) return "ac-7.4";
-  if (dailyEnergyKwh <= CHARGER_THRESHOLDS.medium) return "ac-11";
-  return "ac-22-or-dc";
+  if (dailyEnergyKwh <= CHARGER_THRESHOLDS.low) return "wallbox-7.4";
+  if (dailyEnergyKwh <= CHARGER_THRESHOLDS.medium) return "wallbox-22";
+  return "rapido";
 }
 
 export function calculateEv({

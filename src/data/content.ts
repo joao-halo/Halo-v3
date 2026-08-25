@@ -276,9 +276,9 @@ export const storage = {
         "Locais com rede precária ou ausente, combinando geração, banco de baterias e gerador de apoio.",
     },
   ],
-  image: "/images/armazenamento-banco-baterias-sala-tecnica.jpg",
+  image: "/images/armazenamento-residencia-com-baterias.jpg",
   imageAlt:
-    "Banco de baterias e inversor híbrido instalados em sala técnica com quadro de comando",
+    "Residência iluminada durante chuva ao anoitecer, com módulos fotovoltaicos no telhado e banco de baterias com inversor na parede lateral",
   imageWidth: 900,
   imageHeight: 1100,
   cta: { label: "Falar sobre armazenamento ↗", message: waMessages.storage },
@@ -297,47 +297,70 @@ export const emobility = {
   chargersLabel: "CARREGADORES",
   chargers: [
     {
-      title: "AC 7,4 kW",
-      description: "Monofásico, uso residencial com quilometragem moderada.",
+      title: "Wallbox 7,4 kW",
+      description:
+        "Dá conta da recarga diária do seu carro durante a noite. Opera em 220 V, inclusive em rede bifásica — o padrão de boa parte das residências brasileiras. É o carregador de casa e de condomínio.",
     },
     {
-      title: "AC 11 kW",
-      description: "Trifásico, recarga noturna completa para uso intenso.",
+      title: "Wallbox 22 kW",
+      description:
+        "Trifásico 380 V, o que exige autotransformador na maioria das instalações. Duas saídas: recarrega dois veículos a 11 kW ao mesmo tempo. Indicado para uso comercial intensivo.",
     },
     {
-      title: "AC 22 kW",
-      description: "Trifásico, dois veículos ou reposição rápida em uso comercial.",
-    },
-    {
-      title: "DC fast",
-      description: "Corrente contínua para frota e estabelecimento com alta rotatividade.",
+      title: "Carregador rápido",
+      description:
+        "Recarga de alta potência em corrente contínua, para quando o tempo de parada é curto. É o equipamento dos eletropostos comerciais.",
     },
   ],
   scopeLabel: "ESCOPO DE ENTREGA",
   scope: [
     {
       number: "01",
-      title: "Projeto de infraestrutura elétrica",
+      title: "Análise de carga com analisador de energia",
       description:
-        "Levantamento do padrão de entrada, dimensionamento de circuito, proteções e caminhamento.",
+        "Instalamos um analisador de energia e registramos a curva de carga real antes de especificar qualquer equipamento. É o que evita sobrecarregar o padrão de entrada.",
     },
     {
       number: "02",
+      title: "Projeto da estação e da instalação",
+      description:
+        "Desenvolvimento do projeto elétrico completo, do padrão de entrada ao ponto de recarga — para consumidor final e para empresas.",
+    },
+    {
+      number: "03",
       title: "Gestão e balanceamento de carga",
       description:
         "Vários pontos operando em conjunto sem ultrapassar a capacidade disponível na instalação.",
     },
     {
-      number: "03",
-      title: "Recarga em condomínio com rateio",
+      number: "04",
+      title: "Condomínios, frotas e estabelecimentos",
       description:
-        "Infraestrutura compartilhada, medição individual por vaga e regras claras de cobrança.",
+        "Infraestrutura compartilhada com medição individual para rateio, e estações múltiplas dimensionadas por rotina de uso.",
+    },
+  ],
+  complianceLabel: "SEGURANÇA E REGULAMENTAÇÃO",
+  complianceTitle: "Estação de recarga entra na vistoria do Corpo de Bombeiros.",
+  complianceIntro:
+    "Instalar ponto de recarga em garagem coletiva deixou de ser só uma questão elétrica: a conformidade do SAVE passou a ser verificada junto com o restante da segurança contra incêndio da edificação.",
+  compliance: [
+    {
+      code: "ABNT NBR 17019",
+      name: "Requisitos do SAVE",
+      description:
+        "Define o Sistema de Alimentação de Veículos Elétricos e os requisitos do circuito. Cada ponto de recarga é dimensionado com fator de demanda 1 — salvo quando há controle de recarga instalado, o que muda o porte da infraestrutura.",
     },
     {
-      number: "04",
-      title: "Frotas e estabelecimentos comerciais",
+      code: "IT 30 · CBMMG",
+      name: "AVCB e combate a incêndio",
       description:
-        "Estações múltiplas dimensionadas por rotina de uso, tempo de parada e energia reposta por dia.",
+        "Em Minas Gerais, a Instrução Técnica nº 30 do Corpo de Bombeiros passou a tratar do SAVE. Estação fora de conformidade vira pendência na emissão e na renovação do Auto de Vistoria do Corpo de Bombeiros.",
+    },
+    {
+      code: "Projeto e comissionamento",
+      name: "A documentação da vistoria",
+      description:
+        "Memorial do SAVE, relatório de conformidade e ART, com as proteções do circuito especificadas em projeto. É o que o condomínio ou o estabelecimento apresenta ao Corpo de Bombeiros.",
     },
   ],
   cta: { label: "Falar sobre recarga ↗", message: waMessages.emobility },

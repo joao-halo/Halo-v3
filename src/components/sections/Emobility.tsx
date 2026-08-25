@@ -1,7 +1,9 @@
 import {
+  Badge,
   ButtonLink,
   Container,
   Grid,
+  Heading,
   NumberedItem,
   Overline,
   Reveal,
@@ -33,7 +35,7 @@ export function Emobility() {
           <Reveal>
             <Overline tone="accent">{emobility.chargersLabel}</Overline>
           </Reveal>
-          <Grid cols="quarters" className="mt-5">
+          <Grid cols="thirds" className="mt-5">
             {emobility.chargers.map((charger, index) => (
               <Reveal key={charger.title} index={index}>
                 <article className="h-full border border-ink-inverse/20 rounded-md p-5">
@@ -70,23 +72,25 @@ export function Emobility() {
 
         <div className="mt-9">
           <Reveal>
-            <Overline tone="accent">{emobility.scopeLabel}</Overline>
+            <Overline tone="accent">{emobility.complianceLabel}</Overline>
+            <Heading level="h3" as="h3" className="mt-2 text-ink-inverse">
+              {emobility.complianceTitle}
+            </Heading>
+            <Text measure className="mt-3 text-ink-inverse-muted">
+              {emobility.complianceIntro}
+            </Text>
           </Reveal>
-          <Grid cols="quarters" className="mt-5">
-            {emobility.scope.map((item, index) => (
-              <Reveal key={item.number} index={index}>
-                <article className="border-t border-ink-inverse/20 pt-5">
-                  <p
-                    aria-hidden
-                    className="font-display font-bold text-[length:var(--text-step-number)] leading-none text-accent"
-                  >
-                    {item.number}
-                  </p>
-                  <h3 className="font-display font-semibold text-[length:var(--text-team-name)] text-ink-inverse mt-4">
-                    {item.title}
-                  </h3>
+
+          <Grid cols="thirds" className="mt-5">
+            {emobility.compliance.map((norm, index) => (
+              <Reveal key={norm.code} index={index}>
+                <article className="h-full border border-ink-inverse/20 rounded-md p-5">
+                  <Badge tone="inverse">{norm.code}</Badge>
+                  <h4 className="font-display font-semibold text-[length:var(--text-team-name)] text-ink-inverse mt-4">
+                    {norm.name}
+                  </h4>
                   <Text size="sm" className="mt-2 text-ink-inverse-muted">
-                    {item.description}
+                    {norm.description}
                   </Text>
                 </article>
               </Reveal>
