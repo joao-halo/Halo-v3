@@ -26,30 +26,24 @@ Enquanto um item desta lista não for resolvido, o site não deve ser publicado.
 
 ### Endereço — `site.address` ✅ preenchido
 
-Rua Barretos, 112, Loja A · CEP 31744-705 · Belo Horizonte / MG.
+Rua José da Costa, 116 · São João Batista · CEP 31515-120 · Belo Horizonte / MG.
+
+Conferido contra o registro dos Correios: o CEP 31515-120 corresponde à Rua José
+da Costa no bairro São João Batista (Venda Nova). Sem divergência.
 
 **É endereço postal, usado só nos dados estruturados para busca local.** Não
 aparece em nenhum texto visível da página, e o site fala em região atendida em vez
 de convidar o cliente a comparecer.
 
-> ⚠️ **Conferir o bairro.** O registro dos Correios associa o CEP 31744-705 à Rua
-> Barretos no bairro **Mariquinhas**; você informou **Juliana**. Os dois são
-> vizinhos na região Norte, mas o bairro precisa bater com o cadastro dos Correios
-> e com o Google Business Profile — divergência de NAP (nome, endereço, telefone)
-> enfraquece o posicionamento em busca local. Por isso o bairro **não foi incluído
-> no JSON-LD**: fica em `site.address.district` até a confirmação.
+O bairro entra dentro de `streetAddress` no JSON-LD, porque o `PostalAddress` do
+schema.org não tem campo próprio para bairro — é a convenção usada em endereços
+brasileiros.
 
-### Coordenadas — `site.geo` ⬜ pendente
+### Coordenadas — `site.geo` ✅ preenchido
 
-Estão como `null`, e o JSON-LD **omite o bloco `geo`** enquanto for assim. É
-proposital: apontar para o centro de Belo Horizonte informaria ao Google um local
-a quilômetros da sede, o que é pior do que não informar.
-
-Para preencher: no Google Maps, clique com o botão direito sobre o ponto exato e
-copie o par de números para `geo: { latitude: …, longitude: … }`. O bloco volta
-sozinho ao JSON-LD.
-
----
+`-19.820417, -43.956333`, convertidas de 19°49'13.5"S 43°57'22.8"W lidas no Google
+Maps. Ficam cerca de 10,7 km ao norte do centro de Belo Horizonte, o que bate com
+a localização de São João Batista na região de Venda Nova.
 
 ## 2. Domínio — resolvido
 
@@ -185,9 +179,8 @@ os testes conferem a coerência entre as fórmulas.
 - [x] WhatsApp real em `WHATSAPP_NUMBER` — falta testar o link num celular
 - [x] Telefone, e-mail e Instagram preenchidos
 - [x] Razão social e CNPJ preenchidos
-- [x] Endereço postal preenchido
-- [ ] Confirmar o bairro (Correios registra Mariquinhas, não Juliana)
-- [ ] Coordenadas da sede em `site.geo`
+- [x] Endereço postal preenchido e conferido nos Correios
+- [x] Coordenadas da sede em `site.geo`
 - [ ] Domínio atualizado nos quatro arquivos
 - [x] Seis fotos reais nos cards da seção Halo Engenharia
 - [ ] Duas imagens de seção ainda em placeholder (fotovoltaico e armazenamento)

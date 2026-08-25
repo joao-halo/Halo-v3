@@ -17,13 +17,14 @@ export function StructuredData() {
     email: site.email,
     address: {
       "@type": "PostalAddress",
-      streetAddress: site.address.street,
+      // schema.org não tem campo de bairro; no Brasil ele vai no logradouro
+      streetAddress: `${site.address.street} - ${site.address.district}`,
       addressLocality: site.address.city,
       addressRegion: site.address.state,
       postalCode: site.address.postalCode,
       addressCountry: site.address.country,
     },
-    // omitido enquanto as coordenadas reais não forem conhecidas
+    // omitido enquanto as coordenadas forem desconhecidas
     ...(site.geo
       ? {
           geo: {

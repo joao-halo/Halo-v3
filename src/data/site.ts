@@ -27,20 +27,20 @@ export const site = {
    * mostra a região atendida, não convida o cliente a comparecer.
    */
   address: {
-    street: "Rua Barretos, 112, Loja A",
-    district: "Juliana",
+    street: "Rua José da Costa, 116",
+    district: "São João Batista",
     city: "Belo Horizonte",
     state: "MG",
-    postalCode: "31744-705",
+    postalCode: "31515-120",
     country: "BR",
   },
   /**
-   * PENDENTE — coordenadas exatas da sede.
-   * Ficam de fora do JSON-LD enquanto forem desconhecidas: apontar para o
-   * centro de Belo Horizonte seria informar ao Google um local errado.
-   * Para preencher: botão direito sobre o ponto no Google Maps e copiar o par.
+   * Coordenadas da sede, em graus decimais.
+   * Origem: 19°49'13.5"S 43°57'22.8"W, lidas no Google Maps.
    */
-  geo: null as { latitude: number; longitude: number } | null,
+  geo: { latitude: -19.820417, longitude: -43.956333 } as
+    | { latitude: number; longitude: number }
+    | null,
   /**
    * Telefone de contato. É o mesmo número do WhatsApp — se a empresa passar a
    * ter uma linha fixa separada, troque `phone`/`phoneHref` e deixe
