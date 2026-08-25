@@ -25,11 +25,11 @@ export const header = {
 export const hero = {
   id: "inicio",
   eyebrow: "ENERGIA SOLAR, ARMAZENAMENTO E RECARGA EM BELO HORIZONTE",
-  title: "Energia projetada com engenharia.",
+  title: "Energia para gerar, armazenar e abastecer.",
   paragraph:
-    "Analisamos consumo, perfil de carga e infraestrutura elétrica antes de qualquer proposta. Projeto, execução e homologação acompanhados até a conexão.",
+    "Economize energia com painéis solares, armazene sua energia em baterias e abasteça seu carro elétrico. Projeto, instalação e homologação com engenharia própria em Belo Horizonte.",
   primaryCta: { label: "Solicitar análise ↗", message: waMessages.hero },
-  secondaryCta: { label: "Conhecer as soluções ↓", href: "#solucoes" },
+  secondaryCta: { label: "Simulador rápido ↓", href: "#simuladores" },
   proofs: [
     "Projeto elétrico e homologação",
     "Belo Horizonte e região metropolitana",
@@ -504,6 +504,8 @@ export const contact = {
       interest: {
         label: "Interesse",
         placeholder: "Selecione uma opção",
+        /** Opção já marcada ao abrir o formulário. */
+        defaultValue: "photovoltaic",
         options: [
           { value: "photovoltaic", label: "Fotovoltaico" },
           { value: "storage", label: "Armazenamento" },

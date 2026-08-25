@@ -24,22 +24,30 @@ Enquanto um item desta lista não for resolvido, o site não deve ser publicado.
 | ~~`site.url`~~ | ✅ `https://www.haloenergy.com.br` | **Preenchido.** Forma `www` porque o apex redireciona para ela |
 | `site.openingHours` | `Segunda a sexta, 8h às 18h` | Horário real de atendimento |
 
-### Endereço — `site.address`
+### Endereço — `site.address` ✅ preenchido
 
-| Campo | O que colocar |
-|---|---|
-| `street` | Logradouro e número |
-| `district` | Bairro |
-| `postalCode` | CEP |
+Rua Barretos, 112, Loja A · CEP 31744-705 · Belo Horizonte / MG.
 
-`city`, `state` e `country` já estão preenchidos (Belo Horizonte / MG / BR).
+**É endereço postal, usado só nos dados estruturados para busca local.** Não
+aparece em nenhum texto visível da página, e o site fala em região atendida em vez
+de convidar o cliente a comparecer.
 
-### Coordenadas — `site.geo`
+> ⚠️ **Conferir o bairro.** O registro dos Correios associa o CEP 31744-705 à Rua
+> Barretos no bairro **Mariquinhas**; você informou **Juliana**. Os dois são
+> vizinhos na região Norte, mas o bairro precisa bater com o cadastro dos Correios
+> e com o Google Business Profile — divergência de NAP (nome, endereço, telefone)
+> enfraquece o posicionamento em busca local. Por isso o bairro **não foi incluído
+> no JSON-LD**: fica em `site.address.district` até a confirmação.
 
-Estão no centro de Belo Horizonte (`-19.9167, -43.9345`), não na sede. Substitua
-pela latitude e longitude reais do endereço — elas entram no JSON-LD que o Google
-usa para busca local. Pegue no Google Maps: clique com o botão direito sobre o
-ponto e copie o par de números.
+### Coordenadas — `site.geo` ⬜ pendente
+
+Estão como `null`, e o JSON-LD **omite o bloco `geo`** enquanto for assim. É
+proposital: apontar para o centro de Belo Horizonte informaria ao Google um local
+a quilômetros da sede, o que é pior do que não informar.
+
+Para preencher: no Google Maps, clique com o botão direito sobre o ponto exato e
+copie o par de números para `geo: { latitude: …, longitude: … }`. O bloco volta
+sozinho ao JSON-LD.
 
 ---
 
@@ -177,8 +185,9 @@ os testes conferem a coerência entre as fórmulas.
 - [x] WhatsApp real em `WHATSAPP_NUMBER` — falta testar o link num celular
 - [x] Telefone, e-mail e Instagram preenchidos
 - [x] Razão social e CNPJ preenchidos
-- [ ] Endereço completo (rua, número, bairro, CEP)
-- [ ] Coordenadas da sede corrigidas no `site.geo`
+- [x] Endereço postal preenchido
+- [ ] Confirmar o bairro (Correios registra Mariquinhas, não Juliana)
+- [ ] Coordenadas da sede em `site.geo`
 - [ ] Domínio atualizado nos quatro arquivos
 - [x] Seis fotos reais nos cards da seção Halo Engenharia
 - [ ] Duas imagens de seção ainda em placeholder (fotovoltaico e armazenamento)

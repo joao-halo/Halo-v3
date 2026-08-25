@@ -21,17 +21,26 @@ export const site = {
   state: "MG",
   stateName: "Minas Gerais",
   region: "Belo Horizonte e região metropolitana",
-  /** PLACEHOLDER — endereço completo. */
+  /**
+   * Endereço postal, usado APENAS nos dados estruturados para busca local.
+   * Não é ponto de atendimento ao público e não aparece na página — o site
+   * mostra a região atendida, não convida o cliente a comparecer.
+   */
   address: {
-    street: "PLACEHOLDER — Rua e número",
-    district: "PLACEHOLDER — Bairro",
+    street: "Rua Barretos, 112, Loja A",
+    district: "Juliana",
     city: "Belo Horizonte",
     state: "MG",
-    postalCode: "PLACEHOLDER — 00000-000",
+    postalCode: "31744-705",
     country: "BR",
   },
-  /** PLACEHOLDER — coordenadas da sede, usadas no JSON-LD. */
-  geo: { latitude: -19.9167, longitude: -43.9345 },
+  /**
+   * PENDENTE — coordenadas exatas da sede.
+   * Ficam de fora do JSON-LD enquanto forem desconhecidas: apontar para o
+   * centro de Belo Horizonte seria informar ao Google um local errado.
+   * Para preencher: botão direito sobre o ponto no Google Maps e copiar o par.
+   */
+  geo: null as { latitude: number; longitude: number } | null,
   /**
    * Telefone de contato. É o mesmo número do WhatsApp — se a empresa passar a
    * ter uma linha fixa separada, troque `phone`/`phoneHref` e deixe

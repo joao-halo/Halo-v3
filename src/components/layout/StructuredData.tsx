@@ -23,11 +23,16 @@ export function StructuredData() {
       postalCode: site.address.postalCode,
       addressCountry: site.address.country,
     },
-    geo: {
-      "@type": "GeoCoordinates",
-      latitude: site.geo.latitude,
-      longitude: site.geo.longitude,
-    },
+    // omitido enquanto as coordenadas reais não forem conhecidas
+    ...(site.geo
+      ? {
+          geo: {
+            "@type": "GeoCoordinates",
+            latitude: site.geo.latitude,
+            longitude: site.geo.longitude,
+          },
+        }
+      : {}),
     areaServed: [
       { "@type": "City", name: "Belo Horizonte" },
       { "@type": "AdministrativeArea", name: "Região Metropolitana de Belo Horizonte" },

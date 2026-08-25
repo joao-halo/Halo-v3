@@ -79,7 +79,7 @@ export function ContactForm() {
     formState: { errors },
   } = useForm<FormValues>({
     resolver: zodResolver(schema),
-    defaultValues: { interest: "", website: "" },
+    defaultValues: { interest: fields.interest.defaultValue, website: "" },
   });
 
   const onSubmit = async (values: FormValues) => {
