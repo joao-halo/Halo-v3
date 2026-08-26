@@ -174,6 +174,39 @@ os testes conferem a coerência entre as fórmulas.
 
 ---
 
+## 5b. Rastreamento e privacidade
+
+A tag do Google Ads (AW-18410151994) está instalada e dispara a conversão
+"Visita ao site" a cada carregamento da página em produção.
+
+> ⚠️ **O site não tem política de privacidade nem aviso de cookies.**
+> A tag do Google Ads grava cookies e envia dados de navegação para o Google.
+> Sob a LGPD isso exige base legal e, na prática, quase todo site brasileiro
+> resolve com um aviso de cookies e uma página de política de privacidade.
+> Hoje o site não tem nenhum dos dois — o formulário de contato também coleta
+> nome, e-mail e telefone sem política publicada.
+>
+> Não bloqueia o lançamento, mas é lacuna jurídica real. Duas frentes:
+> uma página de política de privacidade, e o **Google Consent Mode v2**, que é o
+> mecanismo do próprio Google para condicionar a tag ao consentimento.
+
+### Medir o que importa
+
+A conversão instalada é "Visita ao site", que dispara em todo carregamento. É um
+sinal fraco: mede tráfego, não interesse.
+
+As conversões que descrevem geração de lead neste site são o **clique nos CTAs de
+WhatsApp** (dez pontos na página) e o **envio do formulário**. Para medi-las,
+crie ações de conversão separadas no Google Ads — cada uma vem com o próprio
+rótulo `send_to` — e me passe os rótulos que eu ligo aos elementos certos.
+
+### Tráfego interno
+
+Acessos da própria equipe pelo domínio de produção contam como conversão. Para
+excluir, use exclusão de IP nas configurações da conta do Google Ads.
+
+---
+
 ## 6. Antes de publicar — checagem final
 
 - [x] WhatsApp real em `WHATSAPP_NUMBER` — falta testar o link num celular
@@ -188,3 +221,5 @@ os testes conferem a coerência entre as fórmulas.
 - [ ] FAQ revisada por engenharia
 - [ ] Premissas dos simuladores validadas
 - [ ] `npm run build` e `npm run test` passando
+- [ ] Tag do Google Ads conferida em produção com o Tag Assistant
+- [ ] Política de privacidade e aviso de cookies publicados

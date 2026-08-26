@@ -50,6 +50,48 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Outfit:wght@300..700&display=swap"
     />
+
+    <!--
+      Google Ads — tag do Google (gtag.js) + snippet de evento da conversão
+      "Visita ao site". ID da conta: AW-18410151994.
+
+      O site tem uma página só, então a tag do Google e o evento de conversão
+      ficam ambos aqui — é a "página de conversão" das instruções do Google Ads.
+      Não há versão AMP, então a parte AMP do e-mail não se aplica.
+
+      A guarda de hostname impede que rodar `npm run dev` dispare conversão
+      real e polua os dados da conta. Ela é à prova de falha na direção certa:
+      qualquer domínio que não seja local carrega a tag, então produção nunca
+      deixa de medir. Para excluir também a equipe, use exclusão de IP na
+      própria conta do Google Ads.
+    -->
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+
+      (function () {
+        var host = location.hostname;
+        var local =
+          host === "localhost" ||
+          host === "127.0.0.1" ||
+          host === "" ||
+          host.endsWith(".local");
+        if (local) return;
+
+        var s = document.createElement("script");
+        s.async = true;
+        s.src = "https://www.googletagmanager.com/gtag/js?id=AW-18410151994";
+        document.head.appendChild(s);
+
+        gtag("js", new Date());
+        gtag("config", "AW-18410151994");
+        gtag("event", "conversion", {
+          send_to: "AW-18410151994/RA5SCK2e2eccELrA0spE",
+        });
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

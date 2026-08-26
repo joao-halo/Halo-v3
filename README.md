@@ -136,6 +136,30 @@ preenchido, o envio é descartado sem aviso.
 
 ---
 
+## Acompanhamento de conversões (Google Ads)
+
+A tag do Google (`gtag.js`) da conta **AW-18410151994** fica em
+[`index.html`](index.html), dentro do `<head>`. Junto dela dispara o snippet de
+evento da conversão "Visita ao site".
+
+O site tem uma página só, então a tag e o evento de conversão convivem no mesmo
+lugar — é a "página de conversão" das instruções do Google Ads. Não há versão AMP,
+então aquela parte das instruções não se aplica.
+
+**A tag não carrega em `localhost`.** Uma guarda de hostname evita que rodar
+`npm run dev` registre conversão real e distorça os dados da conta. Ela é à prova
+de falha na direção certa: qualquer domínio que não seja local carrega a tag, então
+produção nunca deixa de medir.
+
+Para conferir depois do deploy, use a extensão **Google Tag Assistant** no
+domínio de produção — é a verificação que vale, porque em ambiente local a tag
+está propositalmente desligada.
+
+Para trocar o ID da conta ou o rótulo da conversão, edite os dois valores no
+`<head>` do `index.html`.
+
+---
+
 ## Deploy
 
 O build gera um site estático em `dist/`. Não há servidor para manter.
