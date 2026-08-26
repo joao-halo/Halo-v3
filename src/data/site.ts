@@ -51,6 +51,19 @@ export const site = {
   email: "contato@haloenergy.com.br",
   instagram: "https://instagram.com/halosolarpower",
   instagramHandle: "@halosolarpower",
+  /**
+   * Perfis e registros públicos que confirmam a identidade da empresa.
+   *
+   * Serve para desambiguação: quanto mais âncoras externas, menor a chance de
+   * um mecanismo de IA confundir a Halo com outra empresa de nome parecido, e
+   * maior a confiança que ele atribui ao que o site afirma.
+   *
+   * Acrescente aqui, conforme forem criados:
+   *   • Google Business Profile (o de maior peso para busca local)
+   *   • LinkedIn da empresa
+   *   • Registro do responsável técnico no CREA-MG
+   */
+  sameAs: ["https://instagram.com/halosolarpower"] as string[],
   /** PLACEHOLDER — horário de atendimento. */
   openingHours: "Segunda a sexta, 8h às 18h",
 } as const;

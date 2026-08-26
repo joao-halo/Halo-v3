@@ -1,4 +1,67 @@
+# Halo Energy — política de rastreamento
+#
+# Duas famílias de robô que costumam ser confundidas:
+#
+#   • Busca e citação — alimentam as respostas que o usuário vê hoje.
+#     Bloquear estes tira a empresa das respostas de IA.
+#   • Treino de modelo — alimentam o treino de modelos futuros.
+#     Bloquear estes NÃO remove o site das respostas de busca.
+#
+# Erro comum: bloquear Google-Extended achando que isso tira o site dos AI
+# Overviews. Não tira — os AI Overviews usam o Googlebot comum. O mesmo vale
+# para GPTBot: quem alimenta as respostas do ChatGPT é o OAI-SearchBot.
+#
+# Decisão da Halo: liberar tudo. Para uma marca em construção, ser aprendida
+# pelos modelos vale mais do que proteger o texto de um site institucional.
+
 User-agent: *
+Allow: /
+
+# ---------------------------------------------------------------- busca e citação
+User-agent: Googlebot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# ------------------------------------------------------------------ treino de modelo
+User-agent: GPTBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: meta-externalagent
 Allow: /
 
 Sitemap: https://www.haloenergy.com.br/sitemap.xml

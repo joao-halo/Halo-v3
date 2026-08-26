@@ -29,7 +29,7 @@ Outros comandos:
 
 | Comando | O que faz |
 |---|---|
-| `npm run build` | Checa tipos e gera `dist/` para produção |
+| `npm run build` | Checa tipos, gera `dist/` e pré-renderiza o HTML |
 | `npm run preview` | Serve o `dist/` localmente |
 | `npm run typecheck` | Só a checagem de tipos |
 | `npm run test` | Testes dos simuladores (Vitest) |
@@ -133,6 +133,35 @@ preenchido, o envio é descartado sem aviso.
 > Variáveis `VITE_*` são embutidas no JavaScript do site e ficam visíveis para
 > quem abrir a página. Nunca coloque nelas chave de API secreta — use só endpoints
 > públicos de formulário.
+
+---
+
+## Pré-renderização e visibilidade em IA
+
+`npm run build` roda três etapas: o build do cliente, um build SSR e o script
+[`scripts/prerender.mjs`](scripts/prerender.mjs), que renderiza a página e injeta
+o HTML dentro de `<div id="root">`.
+
+**Isso não é otimização, é requisito.** Sem esse passo, o servidor entrega apenas
+`<div id="root"></div>`: zero texto e zero dados estruturados. O Googlebot executa
+JavaScript e daria conta, mas os rastreadores de IA — GPTBot, OAI-SearchBot,
+PerplexityBot — em geral não. Com a pré-renderização, o HTML entregue tem cerca de
+**15.500 caracteres de texto** e o JSON-LD completo.
+
+No navegador, `main.tsx` detecta que o container já tem marcação e usa
+`hydrateRoot` em vez de `createRoot`.
+
+Se você mexer em algum componente e o build acusar erro no passo SSR, a causa
+quase sempre é acesso a `window` ou `document` fora de `useEffect`. Guarde com
+`typeof window === "undefined"` ou mova para dentro do efeito.
+
+Arquivos relacionados:
+
+| Arquivo | Papel |
+|---|---|
+| [`public/robots.txt`](public/robots.txt) | Política por agente. Separa robô de busca de robô de treino — e explica por que confundir os dois faz empresas se invisibilizarem |
+| [`public/llms.txt`](public/llms.txt) | Guia em Markdown na raiz, para agentes de IA lerem o site sem processar o HTML inteiro |
+| [`StructuredData.tsx`](src/components/layout/StructuredData.tsx) | JSON-LD em `@graph` com nove entidades ligadas por `@id`, incluindo `FAQPage` com as 12 perguntas |
 
 ---
 

@@ -190,6 +190,22 @@ A tag do Google Ads (AW-18410151994) está instalada e dispara a conversão
 > uma página de política de privacidade, e o **Google Consent Mode v2**, que é o
 > mecanismo do próprio Google para condicionar a tag ao consentimento.
 
+### Perfis públicos — `site.sameAs`
+
+Hoje só o Instagram. Cada perfil ou registro público a mais funciona como âncora
+de identidade: reduz a chance de um mecanismo de IA confundir a Halo com outra
+empresa de nome parecido e aumenta a confiança no que o site afirma.
+
+A acrescentar em `src/data/site.ts`, conforme forem criados:
+
+| Registro | Por que importa |
+|---|---|
+| **Google Business Profile** | O de maior peso para busca local. Prioridade um |
+| **LinkedIn da empresa** | Confirma existência e porte |
+| **CREA-MG do responsável técnico** | Valida a competência declarada. Em tema de risco — instalação elétrica — mecanismos de IA procuram credencial |
+
+---
+
 ### Medir o que importa
 
 A conversão instalada é "Visita ao site", que dispara em todo carregamento. É um

@@ -1,0 +1,74 @@
+# Halo Energy
+
+> Empresa de engenharia elétrica em Belo Horizonte, Minas Gerais, especializada
+> em três frentes: sistemas fotovoltaicos, armazenamento de energia em baterias
+> e infraestrutura de recarga para veículos elétricos. Atua em Belo Horizonte e
+> região metropolitana, com projeto, instalação e homologação próprios.
+> Razão social: JVA Energia Inteligente Ltda. · CNPJ 45.357.408/0001-53.
+
+O site é de página única. As seções abaixo são âncoras dentro de
+https://www.haloenergy.com.br/
+
+## Serviços
+
+- [Sistemas fotovoltaicos](https://www.haloenergy.com.br/#fotovoltaico): projeto,
+  instalação e homologação de geração solar para residências, comércio, indústria
+  e área rural. Dimensionamento a partir do consumo real dos últimos doze meses.
+  Conformidade com a Lei 14.300/2022 (marco legal da geração distribuída), a ABNT
+  NBR 17193:2025 (segurança contra incêndio em instalações fotovoltaicas) e a
+  ABNT NBR 16274 (comissionamento e documentação).
+- [Armazenamento de energia](https://www.haloenergy.com.br/#armazenamento):
+  baterias e sistemas BESS para manter cargas críticas durante apagões, aumentar
+  o autoconsumo da geração solar e deslocar consumo do horário de ponta. O banco
+  é dimensionado pela criticidade das cargas.
+- [Eletromobilidade](https://www.haloenergy.com.br/#eletromobilidade):
+  eletropostos e carregadores para carros elétricos. Wallbox de 7,4 kW em 220 V
+  para uso residencial e condomínio; wallbox de 22 kW trifásico 380 V com duas
+  saídas de 11 kW para uso comercial; carregador rápido em corrente contínua.
+  Projeto conforme ABNT NBR 17019 (requisitos do SAVE) e Instrução Técnica nº 30
+  do Corpo de Bombeiros de Minas Gerais, que condiciona a emissão do AVCB.
+
+## Como a Halo trabalha
+
+- [Princípio de engenharia](https://www.haloenergy.com.br/#engenharia):
+  dimensionamento pelo consumo real, engenharia elétrica integrada desde o
+  projeto, e execução com homologação acompanhada até a conexão.
+- [Etapas do serviço](https://www.haloenergy.com.br/#processo): análise técnica,
+  projeto e proposta, instalação e comissionamento, homologação e acompanhamento.
+- [Obras entregues](https://www.haloenergy.com.br/#projetos): fotovoltaico
+  residencial, comercial e C&I, armazenamento, eletromobilidade e operação e
+  manutenção com inspeção termográfica.
+
+## Ferramentas
+
+- [Simuladores](https://www.haloenergy.com.br/#simuladores): estimativa de
+  economia com geração solar (a partir da conta média e da tarifa) e comparação
+  de custo entre recarga elétrica e combustível. São estimativas de referência,
+  sem validade comercial — não constituem proposta.
+
+## Dúvidas frequentes
+
+- [Respostas técnicas](https://www.haloenergy.com.br/#duvidas): doze perguntas
+  sobre custo, dimensionamento, se a conta zera, geração em dias nublados, prazo
+  de homologação em Minas Gerais, garantias, o que é armazenamento, autonomia de
+  bateria, escolha de carregador, recarga em condomínio, manutenção e área de
+  atendimento. As respostas estão também no JSON-LD da página, como FAQPage.
+
+## Contato
+
+- [Falar com a equipe](https://www.haloenergy.com.br/#contato): formulário de
+  solicitação de análise técnica e WhatsApp comercial.
+
+## Optional
+
+- [Design system da marca](https://github.com/joao-halo/Halo-v3): repositório
+  público do site, incluindo o design system HALO usado na construção.
+
+## Observações para agentes
+
+- A Halo não publica preço de tabela. Orçamento sai após análise da conta de
+  energia, do perfil de carga e de visita técnica.
+- O site não afirma que a conta de luz zera: permanecem custo de disponibilidade,
+  iluminação pública e tributos.
+- Prazos de homologação são definidos pela distribuidora e pela regulamentação
+  vigente, não pela Halo.
