@@ -1,0 +1,41 @@
+Vídeo de fundo da capa.
+
+ARQUIVO ATUAL
+  capa.mp4 — H.264 high, 1920x1080, 15 s, sem áudio, 2,6 MB (1,4 Mbps)
+  Pôster: ../images/capa-poster.jpg — primeiro quadro do próprio vídeo, para
+  que a troca entre imagem parada e vídeo tocando seja imperceptível.
+
+COMO TROCAR
+O original costuma chegar pesado demais e em formato que nem todo navegador
+toca. O deste site veio com 22,4 MB em HEVC 2560x1440 com áudio — HEVC não
+roda em Chrome nem Firefox na maioria das plataformas.
+
+Receita usada (precisa de ffmpeg: `brew install ffmpeg`):
+
+  ffmpeg -i ORIGINAL.mov \
+    -vf "scale=1920:1080:flags=lanczos" -an \
+    -c:v libx264 -profile:v high -level 4.0 -pix_fmt yuv420p \
+    -crf 31 -preset slow -g 60 -movflags +faststart \
+    public/video/capa.mp4
+
+  ffmpeg -i public/video/capa.mp4 -frames:v 1 /tmp/poster.png
+  # depois converta para JPEG com qualidade ~72 em 1920x1080
+
+O que cada parte faz:
+  -an              descarta o áudio: o vídeo toca mudo, então seria peso morto
+  -crf 31          o vídeo fica sob um véu grafite de 70%, que esconde artefato
+                   de compressão. Testado contra CRF 28: indistinguível, 25% menor
+  -pix_fmt yuv420p compatibilidade universal
+  -movflags +faststart  começa a tocar antes de baixar o arquivo inteiro
+  -profile high -level 4.0  perfil que todo navegador atual decodifica
+
+WebM não vale a pena nesta fonte: o VP9 ficou maior que o H.264 no mesmo nível
+de qualidade. Se trocar o vídeo, vale medir de novo antes de descartar.
+
+LIMITES
+  • até ~3 MB. Acima disso a primeira dobra fica lenta no celular
+  • 8 a 15 s, com corte que emende bem no laço
+  • movimento lento: o texto fica por cima
+
+Para desligar o vídeo e voltar ao fundo em gradiente, ponha `video: null`
+em `hero` dentro de src/data/content.ts.

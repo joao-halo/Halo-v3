@@ -24,12 +24,50 @@ export const header = {
 
 export const hero = {
   id: "inicio",
-  eyebrow: "ENERGIA SOLAR, ARMAZENAMENTO E RECARGA EM BELO HORIZONTE",
   title: "Energia para gerar, armazenar e abastecer.",
-  paragraph:
-    "Economize energia com painéis solares, armazene sua energia em baterias e abasteça seu carro elétrico. Projeto, instalação e homologação com engenharia própria em Belo Horizonte.",
   primaryCta: { label: "Solicitar análise ↗", message: waMessages.hero },
   secondaryCta: { label: "Simulador rápido ↓", href: "#simuladores" },
+
+  /**
+   * Vídeo de fundo da capa.
+   *
+   * Deixe `null` para a capa voltar ao fundo em gradiente. Com o objeto
+   * preenchido, o vídeo roda em laço, mudo e sem som, atrás de um véu grafite
+   * que garante contraste do texto por cima de qualquer quadro.
+   *
+   * Coloque os arquivos em public/video/. O `poster` aparece antes do vídeo
+   * carregar, em conexão limitada e para quem pediu menos animação no sistema.
+   */
+  video: {
+    // Sem WebM: nesta fonte o VP9 ficou maior que o H.264, então seria peso
+    // no repositório sem economia de banda. Reavaliar se o vídeo mudar.
+    mp4: "/video/capa.mp4",
+    poster: "/images/capa-poster.jpg",
+    /** Descrição para leitor de tela. O vídeo é decorativo, mas o rótulo ajuda. */
+    label: "Vídeo de apresentação da Halo Energy",
+    pauseLabel: "Pausar vídeo de fundo",
+    playLabel: "Reproduzir vídeo de fundo",
+  } as {
+    webm?: string;
+    mp4: string;
+    poster: string;
+    label: string;
+    pauseLabel: string;
+    playLabel: string;
+  } | null,
+};
+
+/**
+ * Faixa logo abaixo da capa.
+ *
+ * Recebe o que saiu do vídeo de fundo: o rótulo de posicionamento, o parágrafo
+ * de abertura e as três micro-provas. O conteúdo continua no topo da página e
+ * na primeira dobra da leitura, sem disputar espaço com a imagem em movimento.
+ */
+export const heroSummary = {
+  eyebrow: "ENERGIA SOLAR, ARMAZENAMENTO E RECARGA EM BELO HORIZONTE",
+  paragraph:
+    "Economize energia com painéis solares, armazene sua energia em baterias e abasteça seu carro elétrico. Projeto, instalação e homologação com engenharia própria em Belo Horizonte.",
   proofs: [
     "Projeto elétrico e homologação",
     "Belo Horizonte e região metropolitana",
