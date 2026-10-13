@@ -11,3 +11,6 @@ dist-ssr
 
 # Arquivos compactados do próprio projeto — não são código-fonte
 *.zip
+
+# Dados locais do sistema de SS (Postgres embutido e fotos de teste)
+.ss-data

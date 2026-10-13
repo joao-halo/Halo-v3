@@ -11,18 +11,24 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "generate:images": "node scripts/generate-images.mjs",
-    "build:client": "vite build"
+    "build:client": "vite build",
+    "ss:dev": "node ss/dev.mjs",
+    "ss:criar-usuario": "node ss/criar-usuario.mjs"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.9.0",
+    "@neondatabase/serverless": "^1.2.0",
+    "@vercel/blob": "^2.8.1",
     "framer-motion": "^11.3.8",
     "lucide-react": "^0.427.0",
+    "pdfkit": "^0.20.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.52.1",
-    "zod": "^3.23.8",
-    "@hookform/resolvers": "^3.9.0"
+    "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@electric-sql/pglite": "^0.5.9",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.1",

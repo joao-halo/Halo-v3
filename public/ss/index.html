@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Halo SS</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="Solicitações de Serviço e relatórios diários de obra da Halo.">
+  <meta name="theme-color" content="#006D40">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Halo SS">
+  <link rel="manifest" href="/ss/manifest.webmanifest">
+  <link rel="icon" href="/ss/icons/logo.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/ss/icons/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300..700&family=Geist+Mono:wght@400..500&display=swap">
+  <link rel="stylesheet" href="/ss/app.css">
+</head>
+<body>
+  <header class="topo" id="topo" hidden>
+    <a href="#/" class="marca" aria-label="Início">
+      <img src="/ss/icons/logo.svg" alt="" width="28" height="28">
+      <span>Halo <b>SS</b></span>
+    </a>
+    <nav class="nav">
+      <a href="#/" data-nav="lista">Solicitações</a>
+      <a href="#/equipe" data-nav="equipe" data-admin hidden>Equipe</a>
+      <a href="#/conta" data-nav="conta" class="nav-conta" id="nav-conta">Conta</a>
+    </nav>
+  </header>
+  <main id="app" class="app"></main>
+  <div class="toasts" id="toasts" aria-live="polite"></div>
+  <dialog id="dialogo" class="dialogo">
+    <form method="dialog">
+      <h2 id="dialogo-titulo"></h2>
+      <p id="dialogo-texto"></p>
+      <div class="dialogo-acoes">
+        <button value="nao" class="btn btn-sec">Cancelar</button>
+        <button value="sim" class="btn" id="dialogo-ok">Confirmar</button>
+      </div>
+    </form>
+  </dialog>
+  <script src="/ss/app.js" type="module"></script>
+</body>
+</html>

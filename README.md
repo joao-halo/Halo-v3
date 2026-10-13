@@ -262,3 +262,46 @@ todas as animações.
 Dois pares de cor do design system reprovaram em contraste e foram corrigidos
 dentro da própria paleta da marca — o que foi medido e o que foi trocado está
 registrado em [`DESIGN-TOKENS.md`](DESIGN-TOKENS.md), na seção **Contraste**.
+
+---
+
+## Sistema de SS (área da equipe em `/ss`)
+
+O site também hospeda o sistema de **Solicitações de Serviço** (relatório
+diário de obra) em `https://www.haloenergy.com.br/ss/`. Só entra quem tem
+login cadastrado por um administrador. A página não é indexada (`noindex`) e
+não aparece no menu do site.
+
+| Onde | O quê |
+|---|---|
+| `public/ss/` | interface (PWA instalável no celular e no Mac) |
+| `api/ss.js` | função da Vercel que atende `/ss/api/*` |
+| `ss/lib/` | regras, banco, login, PDF |
+| `vercel.json` | rewrite da API, cabeçalhos de segurança de `/ss` |
+
+**Infraestrutura na Vercel (configurada uma vez no painel do projeto → Storage):**
+
+- **Neon Postgres** → cria a variável `DATABASE_URL`. As tabelas são criadas sozinhas no primeiro acesso.
+- **Blob store privado** → cria a variável `BLOB_READ_WRITE_TOKEN`. As fotos são entregues só pela API, para usuários logados.
+
+**Primeiro administrador:** copie a `DATABASE_URL` do painel da Vercel e rode
+
+```bash
+DATABASE_URL="postgres://..." npm run ss:criar-usuario -- --admin
+```
+
+Os demais usuários são cadastrados na tela **Equipe** do próprio sistema.
+
+**Rodar localmente** (usa Postgres embutido em `.ss-data/`, sem precisar de Neon):
+
+```bash
+npm run ss:criar-usuario -- --admin
+npm run ss:dev
+```
+
+O sistema abre em http://localhost:5180/ss/.
+
+**Regras:** o início é gravado automaticamente ao abrir a SS. O fim é escolhido
+pelo usuário, no mesmo dia. SS esquecidas abertas são encerradas com fim 23:59.
+Todos os usuários veem e editam todas as SS, e o histórico registra quem alterou
+o quê. Cada SS pode ser baixada em PDF.
